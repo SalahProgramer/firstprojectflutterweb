@@ -15,7 +15,7 @@ echo "=== Getting dependencies ==="
 flutter pub get
 
 echo "=== Building Flutter web (release) ==="
-flutter build web --release --web-renderer canvaskit
+flutter build web --release
 
 echo "=== Build complete. Output at build/web ==="
 
