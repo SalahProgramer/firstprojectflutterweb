@@ -5,8 +5,6 @@ import 'package:firstprojectflutterweb/second_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -26,23 +24,12 @@ class _SplashState extends State<Splash> {
     });
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body:  basicSplash()
-    );
+    return Scaffold(backgroundColor: Colors.white, body: basicSplash());
   }
 
-
-
-
-
-  Widget basicSplash(){
+  Widget basicSplash() {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(bottom: 16),
@@ -64,35 +51,28 @@ class _SplashState extends State<Splash> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 3,
-                  children: [
-                    Text(
-                      "انتظر لحظة",
-
-                    ),
-
-                  ],
+                  children: [Text("انتظر لحظة")],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),)),
-
-                }, child: Text("data")
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SplashScreen()),
+                    );
+                  },
+                  child: Text("data"),
                 ),
                 Text(
                   " لأجلك نصنع الأفضل دائمًا\n✨🛍️💫".trim(),
                   textAlign: TextAlign.center,
-
                 ),
               ],
             ),
             Spacer(),
-
           ],
         ),
       ),
     );
-
   }
 }
