@@ -1,4 +1,5 @@
 import 'package:flutter_soloud/flutter_soloud.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 
 class AudioHelper {
@@ -9,6 +10,10 @@ class AudioHelper {
   AudioSource? coinSource;
 
   Future<void> initialize() async {
+    // Skip audio initialization on web to avoid plugin issues
+    if (kIsWeb) {
+      return;
+    }
     soLoud = SoLoud.instance;
     if (soLoud.isInitialized) {
       return;
@@ -22,6 +27,7 @@ class AudioHelper {
 //----background---------------------------
 
   Future<void> playBackgroundAudio() async {
+    if (kIsWeb) return;
     if (!soLoud.isInitialized || backgroundSource == null) return;
 
     soundBackgroundHandle = await soLoud.play(backgroundSource!);
@@ -29,6 +35,7 @@ class AudioHelper {
   }
 
   void stopBackgroundAudio() {
+    if (kIsWeb) return;
     if (soundBackgroundHandle == null) {
       return;
     }
@@ -38,6 +45,7 @@ class AudioHelper {
 //---coin----------------------------------
 
   Future<void> playCoinAudio() async {
+    if (kIsWeb) return;
     if (!soLoud.isInitialized || coinSource == null) return;
 
     await soLoud.play(coinSource!);

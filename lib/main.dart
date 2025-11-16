@@ -14,20 +14,28 @@ import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'salah/utilities/providers.dart';
 import 'salah/main/fawri_main.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'firebase_options.dart';
 
 Box? boxSizes;
 
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    await NotificationService.initializeNotification();
-    await Firebase.initializeApp();
+    // Ensure service locator is always ready before any other awaits
+    await setupServiceLocator();
+
+    if (!kIsWeb) {
+      await NotificationService.initializeNotification();
+    }
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
 
     await AnalyticsService.logAppLaunch();
-    await setupServiceLocator();
     await DynamicLinkService().initDynamicLink();
     FirebaseInAppMessaging.instance.setAutomaticDataCollectionEnabled(true);
     await LocalStorage().initHive();
