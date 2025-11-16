@@ -10,12 +10,14 @@ flutter --version
 
 echo "=== Enabling web support ==="
 flutter config --enable-web
+echo "=== Precaching web artifacts ==="
+flutter precache --web
 
 echo "=== Getting dependencies ==="
 flutter pub get
 
 echo "=== Building Flutter web (release) ==="
-flutter build web --release
+flutter build web --release --no-tree-shake-icons
 
 echo "=== Build complete. Output at build/web ==="
 
