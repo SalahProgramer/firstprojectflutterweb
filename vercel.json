@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "echo Skipping install step; handled in vercel-build.sh",
+  "installCommand": "echo 'Skipping install step; handled in vercel-build.sh'",
   "buildCommand": "bash ./vercel-build.sh",
   "outputDirectory": "build/web"
 }
