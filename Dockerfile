@@ -1,18 +1,16 @@
-# Use Dart official image
 FROM dart:stable
 
-# Set working directory
 WORKDIR /app
 
-# Copy pubspec files and get dependencies first
-COPY pubspec.* ./
+# Copy server pubspec files and get dependencies first
+COPY server/pubspec.* ./
 RUN dart pub get
 
-# Copy all project files
-COPY . .
+# Copy only the server source
+COPY server/. .
 
-# Expose the port your Dart server will run on
+# Expose the port used by the server (defaults to 8080)
 EXPOSE 8080
 
 # Run the Dart server
-CMD ["dart", "run", "server/bin/server.dart"]
+CMD ["dart", "run", "bin/server.dart"]
