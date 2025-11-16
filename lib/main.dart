@@ -19,6 +19,7 @@ import 'firebase_options.dart';
 
 Box? boxSizes;
 
+
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
