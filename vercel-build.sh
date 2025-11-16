@@ -3,21 +3,21 @@ set -euo pipefail
 
 echo "=== Installing Flutter (stable) ==="
 git clone --depth 1 -b stable https://github.com/flutter/flutter.git flutter
-export PATH="$PWD/flutter/bin:$PATH"
+FLUTTER="$PWD/flutter/bin/flutter"
 
 echo "=== Flutter version ==="
-flutter --version
+$FLUTTER --version
 
 echo "=== Enabling web support ==="
-flutter config --enable-web
+$FLUTTER config --enable-web
 echo "=== Precaching web artifacts ==="
-flutter precache --web
+$FLUTTER precache --web
 
 echo "=== Getting dependencies ==="
-flutter pub get
+$FLUTTER pub get
 
 echo "=== Building Flutter web (release) ==="
-flutter build web --release --no-tree-shake-icons
+$FLUTTER build web --release --no-tree-shake-icons
 
 echo "=== Build complete. Output at build/web ==="
 
