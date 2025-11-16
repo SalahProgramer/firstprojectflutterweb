@@ -1,20 +1,19 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:firstprojectflutterweb/second_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 
-class Splash extends StatefulWidget {
-  const Splash({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<Splash> createState() => _SplashState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
   Timer? timer;
   DateTime? _splashStartTime;
 
@@ -76,12 +75,12 @@ class _SplashState extends State<Splash> {
                   height: 10,
                 ),
                 ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),)),
+                  Navigator.pop(context)
 
                 }, child: Text("data")
                 ),
                 Text(
-                  " لأجلك نصنع الأفضل دائمًا\n✨🛍️💫".trim(),
+                  " ✨🛍️💫".trim(),
                   textAlign: TextAlign.center,
 
                 ),
