@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "installCommand": "flutter pub get",
-  "buildCommand": "flutter build web",
+  "buildCommand": "bash ./vercel-build.sh",
   "outputDirectory": "build/web"
 }
 
