@@ -75,7 +75,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 10,
                 ),
                 ElevatedButton(onPressed: (){
-                  Navigator.pop(context)
 
                 }, child: Text("data")
                 ),
