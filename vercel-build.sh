@@ -21,4 +21,9 @@ flutter build web --release --no-tree-shake-icons
 
 echo "=== Build complete. Output at build/web ==="
 
+echo "=== Syncing build/web -> web (for Vercel outputDirectory) ==="
+rm -rf web
+mkdir -p web
+cp -R build/web/. web/
+echo "=== Sync complete. Final output at web ==="
 
