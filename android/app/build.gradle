@@ -32,6 +32,7 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '
 android {
     namespace "fawri.app.shop"
     compileSdkVersion 36
+    ndkVersion = "28.2.13676358"
 
     kotlin {
         jvmToolchain(17)
