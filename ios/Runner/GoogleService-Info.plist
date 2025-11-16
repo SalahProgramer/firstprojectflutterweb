@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>47403596173-ke12nt4tuvta17nvp3t9ghogpj4l0lh0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.47403596173-ke12nt4tuvta17nvp3t9ghogpj4l0lh0</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>47403596173-4ag7rbd5bv1u8s91ccsdniu16v7nopvk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBf8UfFi7BTzAYfXIfrhV8-dFgvO2Z2L7c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>47403596173</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>co.fawri.fawri</string>
+	<key>PROJECT_ID</key>
+	<string>fawri-df598</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fawri-df598.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:47403596173:ios:53f32eab502700276a25c4</string>
+	<key>DATABASE_URL</key>
+	<string>https://fawri-df598-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,41 +1,74 @@
-import 'package:firstprojectflutterweb/web_view.dart';
+import 'package:fawri_app_refactor/LocalDB/Database/local_storage.dart';
+import 'package:fawri_app_refactor/salah/games/audio_helper.dart';
+import 'package:fawri_app_refactor/salah/games/service_locator.dart';
+import 'package:fawri_app_refactor/salah/service/dynamic_link_service.dart';
+import 'package:fawri_app_refactor/salah/service/notification_local_service.dart';
+import 'package:fawri_app_refactor/salah/utilities/sentry_service.dart';
+import 'package:fawri_app_refactor/services/analytics/analytics_service.dart';
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-void main() {
-  runApp(const MyApp());
-}
+import 'package:firebase_core/firebase_core.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+import 'salah/utilities/providers.dart';
+import 'salah/main/fawri_main.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Box? boxSizes;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home:  Splash(),
-    );
+void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    await NotificationService.initializeNotification();
+    await Firebase.initializeApp();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
+    await AnalyticsService.logAppLaunch();
+    await setupServiceLocator();
+    await DynamicLinkService().initDynamicLink();
+    FirebaseInAppMessaging.instance.setAutomaticDataCollectionEnabled(true);
+    await LocalStorage().initHive();
+    
+
+
+    // await FlutterNotificationChannel().registerNotificationChannel(
+    //   description: 'For Showing Message Notifiation',
+    //   id: 'fawri_app',
+    //
+    //   importance: NotificationImportance.IMPORTANCE_HIGH,
+    //   name: 'fawri_app',
+    //   visibility: NotificationVisibility.VISIBILITY_PUBLIC,
+    //   allowBubbles: true,
+    //   enableVibration: true,
+    //   enableSound: true,
+    //   showBadge: true,
+    //
+    // );
+    //
+    // ErrorWidget.builder = (FlutterErrorDetails details) {
+    //   return Container(
+    //     alignment: Alignment.center,
+    //     child: Text(
+    //       "Error\n${details.exception}",
+    //     ),
+    //   );
+    // };
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  } catch (e, stack) {
+    await SentryService.captureError(exception: e, stackTrace: stack);
   }
+  await getIt.get<AudioHelper>().initialize();
+
+  SentryService.init(
+      appRunner: () => runApp(
+            SentryWidget(
+              child: MultiProvider(
+                providers: providers,
+                child: Fawri(),
+              ),
+            ),
+          ));
 }
-
-
-
-
-

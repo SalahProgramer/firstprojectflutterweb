@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fawri</string>
+    <string name="facebook_app_id">900118934256153</string>
+    <string name="fb_login_protocol_scheme">3d1a3340c422f021691cb150a5a10773</string>
+    <string name="facebook_client_token">ac6a6fa1411b03af3a0f7ad61683ee1f</string>
+    <string name="notification_permission_description">السماح لتطبيق فوري بارسال اشعارات اليك ؟</string>
+
+</resources>
+
