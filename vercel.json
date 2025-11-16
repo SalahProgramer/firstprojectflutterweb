@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "framework": "other",
-  "installCommand": "flutter build web",
-  "buildCommand": "flutter pub get",
+  "installCommand": "flutter pub get",
+  "buildCommand": "flutter build web",
   "outputDirectory": "build/web"
 }
 
