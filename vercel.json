@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "installCommand": "echo 'Skipping install step; handled in vercel-build.sh'",
-  "buildCommand": "bash ./vercel-build.sh",
-  "outputDirectory": "build/web"
+  "installCommand": "echo 'Skipping install step; using prebuilt Flutter web output'",
+  "buildCommand": "echo 'Skipping build; using prebuilt Flutter web output in build/web'",
+  "outputDirectory": "build/web",
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
 
 
