@@ -1,8 +1,9 @@
 import 'dart:io';
 
 void main() async {
-  final server = await HttpServer.bind(InternetAddress.anyIPv4, 8080);
-  print('Server running on http://localhost:8080');
+  final port = int.parse(Platform.environment['PORT'] ?? '8080');
+  final server = await HttpServer.bind(InternetAddress.anyIPv4, port);
+  print('Server running on http://localhost:$port');
 
   await for (HttpRequest request in server) {
     request.response
