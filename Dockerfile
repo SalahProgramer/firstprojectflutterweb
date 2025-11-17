@@ -1,16 +1,12 @@
-FROM dart:stable
-
+FROM dart:stable-sdk as build
 WORKDIR /app
-
-# Copy server pubspec files and get dependencies first
 COPY server/pubspec.* ./
 RUN dart pub get
-
-# Copy only the server source
 COPY server/. .
+RUN dart compile exe bin/server.dart -o bin/server
 
-# Expose the port used by the server (defaults to 8080)
+FROM debian:stable-slim
+WORKDIR /app
+COPY --from=build /app/bin/server .
 EXPOSE 8080
-
-# Run the Dart server
-CMD ["dart", "run", "bin/server.dart"]
+CMD ["./server"]
