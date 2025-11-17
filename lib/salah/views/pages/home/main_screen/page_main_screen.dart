@@ -77,8 +77,9 @@ class _PageMainScreenState extends State<PageMainScreen>
 
   /// Scroll to top and trigger refresh with loading indicator
   Future<void> scrollToTopAndRefresh() async {
-    if (_isScrollingToTop || !mounted || pageMainScreenController == null)
+    if (_isScrollingToTop || !mounted || pageMainScreenController == null) {
       return;
+    }
     _isScrollingToTop = true;
 
     try {

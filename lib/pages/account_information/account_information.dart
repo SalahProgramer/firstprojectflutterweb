@@ -6,7 +6,7 @@ import 'package:fawri_app_refactor/salah/widgets/widgets_item_view/button_done.d
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
@@ -25,14 +25,15 @@ import '../chooses_birthdate/chooses_birthdate.dart';
 class AccountInformation extends StatefulWidget {
   final dynamic name, address, area, city, phone, birthday;
 
-  const AccountInformation(
-      {super.key,
-      this.name,
-      this.address,
-      this.area,
-      this.birthday,
-      this.city,
-      this.phone});
+  const AccountInformation({
+    super.key,
+    this.name,
+    this.address,
+    this.area,
+    this.birthday,
+    this.city,
+    this.phone,
+  });
 
   @override
   State<AccountInformation> createState() => AaccounIinformationState();
@@ -62,32 +63,33 @@ class AaccounIinformationState extends State<AccountInformation> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 12.w, left: 12.w, right: 12.w),
         child: ButtonDone(
-            text: "تحديث المعلومات",
-            haveBouncingWidget: false,
-            iconName: Assets.icons.yes,
-            isLoading: pointsControllerClass.loadingSaveProfile,
-            onPressed: () async {
-              FocusScope.of(context).unfocus();
-              if (formKey.currentState!.validate()) {
-                await pointsControllerClass.changeLoadingSaveProfile(true);
-                await dialogUpdateProfile(
-                        phone: pointsControllerClass.phoneProfileController.text
-                            .trim()
-                            .toString(),
-                        name: pointsControllerClass.nameProfileController.text
-                            .trim()
-                            .toString())
-                    .whenComplete(() {
-                  FocusScope.of(context).unfocus();
-                });
+          text: "تحديث المعلومات",
+          haveBouncingWidget: false,
+          iconName: Assets.icons.yes,
+          isLoading: pointsControllerClass.loadingSaveProfile,
+          onPressed: () async {
+            FocusScope.of(context).unfocus();
+            if (formKey.currentState!.validate()) {
+              await pointsControllerClass.changeLoadingSaveProfile(true);
+              await dialogUpdateProfile(
+                phone: pointsControllerClass.phoneProfileController.text
+                    .trim()
+                    .toString(),
+                name: pointsControllerClass.nameProfileController.text
+                    .trim()
+                    .toString(),
+              ).whenComplete(() {
+                FocusScope.of(context).unfocus();
+              });
 
-// Unfocus AFTER the dialog is dismissed
+              // Unfocus AFTER the dialog is dismissed
 
-                await pointsControllerClass.changeLoadingSaveProfile(false);
-              } else {
-                return;
-              }
-            }),
+              await pointsControllerClass.changeLoadingSaveProfile(false);
+            } else {
+              return;
+            }
+          },
+        ),
       ),
       body: SafeArea(
         child: GestureDetector(
@@ -110,59 +112,60 @@ class AaccounIinformationState extends State<AccountInformation> {
                         width: double.maxFinite,
                         // height: 0.3.sh,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular((25.r)),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurStyle: BlurStyle.outer,
-                                  color: Colors.black,
-                                  spreadRadius: 2,
-                                  blurRadius: 10.r)
-                            ],
-                            image: DecorationImage(
-                                filterQuality: FilterQuality.high,
-                                fit: BoxFit.cover,
-                                image: AssetImage(Assets.images.backg.path))),
+                          borderRadius: BorderRadius.circular((25.r)),
+                          boxShadow: [
+                            BoxShadow(
+                              blurStyle: BlurStyle.outer,
+                              color: Colors.black,
+                              spreadRadius: 2,
+                              blurRadius: 10.r,
+                            ),
+                          ],
+                          image: DecorationImage(
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.cover,
+                            image: AssetImage(Assets.images.backg.path),
+                          ),
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 10.h,
-                            ),
+                            SizedBox(height: 10.h),
                             Center(
-                                child: ShaderMask(
-                              blendMode: BlendMode.srcIn,
-                              shaderCallback: (Rect bounds) {
-                                return RadialGradient(
-                                  center: Alignment.topLeft,
-                                  radius: 1.0,
-                                  colors: <Color>[
-                                    Colors.black,
-                                    Colors.black,
-                                    Colors.black,
-                                    Colors.black,
-                                  ],
-                                  tileMode: TileMode.mirror,
-                                ).createShader(bounds);
-                              },
-                              child: Text(
-                                "رصيد النقاط المتوفرة",
-                                style: TextStyle(
+                              child: ShaderMask(
+                                blendMode: BlendMode.srcIn,
+                                shaderCallback: (Rect bounds) {
+                                  return RadialGradient(
+                                    center: Alignment.topLeft,
+                                    radius: 1.0,
+                                    colors: <Color>[
+                                      Colors.black,
+                                      Colors.black,
+                                      Colors.black,
+                                      Colors.black,
+                                    ],
+                                    tileMode: TileMode.mirror,
+                                  ).createShader(bounds);
+                                },
+                                child: Text(
+                                  "رصيد النقاط المتوفرة",
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25.sp,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            )),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 numAndText(
-                                    text: "  نقطة  ",
-                                    num: "${pointsControllerClass.points} "),
-                                SizedBox(
-                                  width: 15.h,
+                                  text: "  نقطة  ",
+                                  num: "${pointsControllerClass.points} ",
                                 ),
+                                SizedBox(width: 15.h),
                                 Container(
-
                                   width: 3.w,
                                   height: 30.h,
                                   decoration: BoxDecoration(
@@ -173,34 +176,34 @@ class AaccounIinformationState extends State<AccountInformation> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 15.h,
-                                ),
+                                SizedBox(width: 15.h),
                                 numAndText(
-                                    text: "  شيكل  ",
-                                    num: "${pointsControllerClass.shekel} "),
+                                  text: "  شيكل  ",
+                                  num: "${pointsControllerClass.shekel} ",
+                                ),
                               ],
                             ),
-                            SizedBox(
-                              height: 10.h,
-                            )
+                            SizedBox(height: 10.h),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
+                    SizedBox(height: 15.h),
                     Stack(
                       clipBehavior: Clip.none,
                       alignment: Alignment.topCenter,
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.r),
-                              color: backColor),
+                            borderRadius: BorderRadius.circular(12.r),
+                            color: backColor,
+                          ),
                           padding: EdgeInsets.only(
-                              left: 12.w, right: 12.w, bottom: 25.w, top: 10.w),
+                            left: 12.w,
+                            right: 12.w,
+                            bottom: 25.w,
+                            top: 10.w,
+                          ),
                           child: Column(
                             children: [
                               Padding(
@@ -211,84 +214,83 @@ class AaccounIinformationState extends State<AccountInformation> {
                                       flex: 1,
                                       child: Column(
                                         children: [
-                                          SizedBox(
-                                            height: 10.h,
-                                          ),
+                                          SizedBox(height: 10.h),
                                           CustomTextFormFieldProfile(
-                                              hintText: "ادخل اسم المستخدم",
-                                              label: "اسم المستخدم",
-                                              inputType: TextInputType.text,
-                                              prefixIcon: Icon(CupertinoIcons
-                                                  .profile_circled),
-                                              controller: pointsControllerClass
-                                                  .nameProfileController,
-                                              hasFocusBorder: true,
-                                              hasFill: true,
-                                              textAlign: TextAlign.center,
-                                              hasSeePassIcon: true,
-                                              hintStyle: CustomTextStyle()
-                                                  .rubik
-                                                  .copyWith(
-                                                      color: Colors.grey,
-                                                      fontSize: 11.sp),
-                                              textStyle: CustomTextStyle()
-                                                  .rubik
-                                                  .copyWith(
-                                                      color:
-                                                          CustomColor.blueColor,
-                                                      fontSize: 11.sp),
-                                              controlPage: null,
-                                              validate: (p0) =>
-                                                  Validation.checkText(
-                                                      p0 ?? "", "الإسم"),
-                                              maxLines: 1),
+                                            hintText: "ادخل اسم المستخدم",
+                                            label: "اسم المستخدم",
+                                            inputType: TextInputType.text,
+                                            prefixIcon: Icon(
+                                              CupertinoIcons.profile_circled,
+                                            ),
+                                            controller: pointsControllerClass
+                                                .nameProfileController,
+                                            hasFocusBorder: true,
+                                            hasFill: true,
+                                            textAlign: TextAlign.center,
+                                            hasSeePassIcon: true,
+                                            hintStyle: CustomTextStyle().rubik
+                                                .copyWith(
+                                                  color: Colors.grey,
+                                                  fontSize: 11.sp,
+                                                ),
+                                            textStyle: CustomTextStyle().rubik
+                                                .copyWith(
+                                                  color: CustomColor.blueColor,
+                                                  fontSize: 11.sp,
+                                                ),
+                                            controlPage: null,
+                                            validate: (p0) =>
+                                                Validation.checkText(
+                                                  p0 ?? "",
+                                                  "الإسم",
+                                                ),
+                                            maxLines: 1,
+                                          ),
                                         ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
+                              SizedBox(height: 10.h),
                               Row(
                                 children: [
                                   Expanded(
                                     flex: 1,
                                     child: Column(
                                       children: [
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
+                                        SizedBox(height: 10.h),
                                         CustomTextFormFieldProfile(
-                                            hintText: "056-123-4567",
-                                            label: "رقم الهاتف",
-                                            inputType: TextInputType.number,
-                                            prefixIcon:
-                                                Icon(CupertinoIcons.phone),
-                                            controller: pointsControllerClass
-                                                .phoneProfileController,
-                                            hasFocusBorder: true,
-                                            maxLength: 10,
-                                            hasFill: true,
-                                            textAlign: TextAlign.center,
-                                            hasSeePassIcon: true,
-                                            hintStyle: CustomTextStyle()
-                                                .rubik
-                                                .copyWith(
-                                                    color: Colors.grey,
-                                                    fontSize: 11.sp),
-                                            textStyle: CustomTextStyle()
-                                                .rubik
-                                                .copyWith(
-                                                    color:
-                                                        CustomColor.blueColor,
-                                                    fontSize: 11.sp),
-                                            controlPage: null,
-                                            validate: (p0) =>
-                                                Validation.checkPhoneNumber(
-                                                    p0 ?? ""),
-                                            maxLines: 1),
+                                          hintText: "056-123-4567",
+                                          label: "رقم الهاتف",
+                                          inputType: TextInputType.number,
+                                          prefixIcon: Icon(
+                                            CupertinoIcons.phone,
+                                          ),
+                                          controller: pointsControllerClass
+                                              .phoneProfileController,
+                                          hasFocusBorder: true,
+                                          maxLength: 10,
+                                          hasFill: true,
+                                          textAlign: TextAlign.center,
+                                          hasSeePassIcon: true,
+                                          hintStyle: CustomTextStyle().rubik
+                                              .copyWith(
+                                                color: Colors.grey,
+                                                fontSize: 11.sp,
+                                              ),
+                                          textStyle: CustomTextStyle().rubik
+                                              .copyWith(
+                                                color: CustomColor.blueColor,
+                                                fontSize: 11.sp,
+                                              ),
+                                          controlPage: null,
+                                          validate: (p0) =>
+                                              Validation.checkPhoneNumber(
+                                                p0 ?? "",
+                                              ),
+                                          maxLines: 1,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -300,9 +302,7 @@ class AaccounIinformationState extends State<AccountInformation> {
                                     flex: 1,
                                     child: Column(
                                       children: [
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
+                                        SizedBox(height: 10.h),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -311,61 +311,68 @@ class AaccounIinformationState extends State<AccountInformation> {
                                           children: [
                                             Expanded(
                                               child: CustomTextFormFieldProfile(
-                                                  hintText: "00/00/0000",
-                                                  label: "تاريخ الميلاد",
-                                                  onTap: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
+                                                hintText: "00/00/0000",
+                                                label: "تاريخ الميلاد",
+                                                onTap: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences.getInstance();
 
-                                                    String phone =
+                                                  String phone =
+                                                      prefs.getString(
+                                                        'phone',
+                                                      ) ??
+                                                      "";
+                                                  if (phone == "") {
+                                                    await showAddPhone(
+                                                      goToSpin: false,
+                                                    );
+                                                    phone =
                                                         prefs.getString(
-                                                                'phone') ??
-                                                            "";
-                                                    if (phone == "") {
-                                                      await showAddPhone(
-                                                          goToSpin: false);
-                                                      phone = prefs.getString(
-                                                              'phone') ??
-                                                          "";
-                                                    }
+                                                          'phone',
+                                                        ) ??
+                                                        "";
+                                                  }
 
-                                                    if (phone != "") {
-                                                      NavigatorApp.push(
-                                                          ChooseBirthdate(
+                                                  if (phone != "") {
+                                                    NavigatorApp.push(
+                                                      ChooseBirthdate(
                                                         name: "",
                                                         phoneController: phone,
                                                         select: 11,
                                                         selectedArea: "",
                                                         token: "",
                                                         userID: "",
-                                                      ));
-                                                    }
-                                                  },
-                                                  prefixIcon: Icon(
-                                                      FontAwesomeIcons
-                                                          .birthdayCake),
-                                                  inputType: TextInputType.text,
-                                                  controller: birthdayController
-                                                      .birthdayProfileController,
-                                                  hasFocusBorder: true,
-                                                  hasTap: true,
-                                                  hasFill: false,
-                                                  textAlign: TextAlign.center,
-                                                  hasSeePassIcon: true,
-                                                  hintStyle: CustomTextStyle()
-                                                      .rubik
-                                                      .copyWith(
-                                                          color: Colors.grey,
-                                                          fontSize: 11.sp),
-                                                  textStyle: CustomTextStyle()
-                                                      .rubik
-                                                      .copyWith(
-                                                          color: CustomColor
-                                                              .blueColor,
-                                                          fontSize: 11.sp),
-                                                  controlPage: null,
-                                                  maxLines: 1),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                prefixIcon: Icon(
+                                                  FontAwesome.birthday_cake,
+                                                ),
+                                                inputType: TextInputType.text,
+                                                controller: birthdayController
+                                                    .birthdayProfileController,
+                                                hasFocusBorder: true,
+                                                hasTap: true,
+                                                hasFill: false,
+                                                textAlign: TextAlign.center,
+                                                hasSeePassIcon: true,
+                                                hintStyle: CustomTextStyle()
+                                                    .rubik
+                                                    .copyWith(
+                                                      color: Colors.grey,
+                                                      fontSize: 11.sp,
+                                                    ),
+                                                textStyle: CustomTextStyle()
+                                                    .rubik
+                                                    .copyWith(
+                                                      color:
+                                                          CustomColor.blueColor,
+                                                      fontSize: 11.sp,
+                                                    ),
+                                                controlPage: null,
+                                                maxLines: 1,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -374,9 +381,7 @@ class AaccounIinformationState extends State<AccountInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
+                              SizedBox(height: 10.h),
                               Consumer<AddressProvider>(
                                 builder: (context, addressprovider, _) {
                                   List<AddressItem> addressItems =
@@ -384,9 +389,7 @@ class AaccounIinformationState extends State<AccountInformation> {
 
                                   return Column(
                                     children: [
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
+                                      SizedBox(height: 15.h),
                                       Stack(
                                         clipBehavior: Clip.none,
                                         alignment: Alignment.bottomCenter,
@@ -397,69 +400,78 @@ class AaccounIinformationState extends State<AccountInformation> {
                                             children: [
                                               Container(
                                                 padding: EdgeInsets.only(
-                                                    top: 20.h, bottom: 20.h),
+                                                  top: 20.h,
+                                                  bottom: 20.h,
+                                                ),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.black,
-                                                        width: 1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.r)),
+                                                  border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        12.r,
+                                                      ),
+                                                ),
                                                 child: Visibility(
                                                   visible: true,
                                                   child: ConstrainedBox(
                                                     constraints: BoxConstraints(
-                                                        minHeight: (addressItems
-                                                                .isEmpty)
-                                                            ? 0.005.sh
-                                                            : 0.1.sh,
-                                                        maxHeight: 0.24.sh),
+                                                      minHeight:
+                                                          (addressItems.isEmpty)
+                                                          ? 0.005.sh
+                                                          : 0.1.sh,
+                                                      maxHeight: 0.24.sh,
+                                                    ),
                                                     child: ListView.separated(
                                                       separatorBuilder:
                                                           (context, index) =>
                                                               SizedBox(
-                                                        height: 4.h,
-                                                      ),
+                                                                height: 4.h,
+                                                              ),
                                                       // physics: A(),
                                                       shrinkWrap: true,
                                                       itemCount:
                                                           addressItems.length,
-                                                      itemBuilder:
-                                                          (context, index) {
+                                                      itemBuilder: (context, index) {
                                                         AddressItem item =
                                                             addressItems[index];
                                                         return Container(
-                                                          decoration:
-                                                              BoxDecoration(
+                                                          decoration: BoxDecoration(
                                                             borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12.r),
+                                                                BorderRadius.circular(
+                                                                  12.r,
+                                                                ),
                                                             // border: Border.all(
                                                             //     color: Colors.black,
                                                             //     width: 1)
                                                           ),
                                                           padding:
                                                               EdgeInsets.all(
-                                                                  6.w),
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      4.w),
+                                                                6.w,
+                                                              ),
+                                                          margin:
+                                                              EdgeInsets.symmetric(
+                                                                horizontal: 4.w,
+                                                              ),
                                                           child: Row(
                                                             children: [
                                                               Text(
-                                                                  "${index + 1}  )  "),
+                                                                "${index + 1}  )  ",
+                                                              ),
                                                               Text(
                                                                 item.name,
-                                                                style: CustomTextStyle().heading1L.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        12.sp),
+                                                                style: CustomTextStyle()
+                                                                    .heading1L
+                                                                    .copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                    ),
                                                               ),
                                                             ],
                                                           ),
@@ -473,36 +485,39 @@ class AaccounIinformationState extends State<AccountInformation> {
                                                 top: -15.h,
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 12.w,
-                                                      vertical: 5.h),
+                                                    horizontal: 12.w,
+                                                    vertical: 5.h,
+                                                  ),
                                                   decoration: BoxDecoration(
                                                     color:
                                                         CustomColor.blueColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            12.r),
+                                                          12.r,
+                                                        ),
                                                   ),
                                                   child: Text(
                                                     "العناوين",
                                                     style: CustomTextStyle()
                                                         .heading1L
                                                         .copyWith(
-                                                            color: Colors.white,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                          color: Colors.white,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
                                                   ),
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                           Positioned(
                                             bottom: -12.h,
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal: 12.w,
-                                                  vertical: 5.h),
+                                                horizontal: 12.w,
+                                                vertical: 5.h,
+                                              ),
                                               decoration: BoxDecoration(
                                                 color: Colors.black,
                                                 borderRadius:
@@ -510,9 +525,12 @@ class AaccounIinformationState extends State<AccountInformation> {
                                               ),
                                               child: InkWell(
                                                 onTap: () {
-                                                  NavigatorApp.push(const AddAddress(
-                                                    loadAllCities: true, // Load all cities from account_information
-                                                  ));
+                                                  NavigatorApp.push(
+                                                    const AddAddress(
+                                                      loadAllCities:
+                                                          true, // Load all cities from account_information
+                                                    ),
+                                                  );
                                                 },
                                                 child: Row(
                                                   crossAxisAlignment:
@@ -530,16 +548,17 @@ class AaccounIinformationState extends State<AccountInformation> {
                                                     Text(
                                                       "اضافة عنوان جديد ",
                                                       style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white,
-                                                          fontSize: 12.sp),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -552,21 +571,20 @@ class AaccounIinformationState extends State<AccountInformation> {
                         Positioned(
                           top: -30.h,
                           child: CircleAvatar(
-                              radius: 35.r,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(90.r),
-                                child: Image(
-                                  image: AssetImage(
-                                    Assets.images.image.path,
-                                  ),
+                            radius: 35.r,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(90.r),
+                              child: Image(
+                                image: AssetImage(Assets.images.image.path),
 
-                                  // 90% of screen width
-                                  fit: BoxFit.contain,
-                                ),
-                              )),
+                                // 90% of screen width
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
-                    )
+                    ),
 
                     // Padding(
                     //   padding: const EdgeInsets.only(top: 50),
@@ -600,9 +618,10 @@ class AaccounIinformationState extends State<AccountInformation> {
             num.toString().trim(),
             textDirection: TextDirection.rtl,
             style: CustomTextStyle().heading1L.copyWith(
-                color: CustomColor.chrismasColor,
-                fontSize: 23.sp,
-                fontWeight: FontWeight.bold),
+              color: CustomColor.chrismasColor,
+              fontSize: 23.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Align(
@@ -611,9 +630,10 @@ class AaccounIinformationState extends State<AccountInformation> {
             text.trim(),
             textDirection: TextDirection.ltr,
             style: TextStyle(
-                color: Colors.black,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold),
+              color: Colors.black,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
