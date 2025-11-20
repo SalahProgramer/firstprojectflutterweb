@@ -27,8 +27,12 @@ class $AssetsAudiosGen {
   String get musicBackground => 'assets/audios/music_background.mp3';
 
   /// List of all assets
-  List<String> get values =>
-      [coins, iDidItMessageTone, messageRingtoneMagic, musicBackground];
+  List<String> get values => [
+    coins,
+    iDidItMessageTone,
+    messageRingtoneMagic,
+    musicBackground,
+  ];
 }
 
 class $AssetsIconsGen {
@@ -144,43 +148,43 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
-        add,
-        allSelect,
-        arrowLeftSvgrepoCom,
-        arrow,
-        bird,
-        boy,
-        buy,
-        cancel,
-        cancelOrder,
-        cartEmpty,
-        cart,
-        check,
-        copy,
-        delete,
-        email,
-        error,
-        girl,
-        heart,
-        home,
-        order,
-        perfumeIcon,
-        phone,
-        pregnant,
-        random,
-        redeemPoints,
-        remove,
-        review,
-        sadFace,
-        shoesBaby,
-        shoesMen,
-        shoesWoman,
-        sizes,
-        sorting,
-        warning,
-        wheel,
-        yes
-      ];
+    add,
+    allSelect,
+    arrowLeftSvgrepoCom,
+    arrow,
+    bird,
+    boy,
+    buy,
+    cancel,
+    cancelOrder,
+    cartEmpty,
+    cart,
+    check,
+    copy,
+    delete,
+    email,
+    error,
+    girl,
+    heart,
+    home,
+    order,
+    perfumeIcon,
+    phone,
+    pregnant,
+    random,
+    redeemPoints,
+    remove,
+    review,
+    sadFace,
+    shoesBaby,
+    shoesMen,
+    shoesWoman,
+    sizes,
+    sorting,
+    warning,
+    wheel,
+    yes,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -279,6 +283,14 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/backg.gif
   AssetGenImage get backg => const AssetGenImage('assets/images/backg.gif');
+
+  /// File path: assets/images/blackFridayLogo.png
+  AssetGenImage get blackFridayLogo =>
+      const AssetGenImage('assets/images/blackFridayLogo.png');
+
+  /// File path: assets/images/blackFridaySplash.gif
+  AssetGenImage get blackFridaySplash =>
+      const AssetGenImage('assets/images/blackFridaySplash.gif');
 
   /// File path: assets/images/button11.png
   AssetGenImage get button11 =>
@@ -438,74 +450,76 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        aLanding,
-        aPPICONGif,
-        aPPICONPng,
-        bagcat,
-        beautycat,
-        electCat,
-        fawriIcon,
-        homecat,
-        jwelerycat,
-        kLanding,
-        mencat,
-        opt,
-        officecat,
-        petcat,
-        pregcat,
-        shoescat,
-        sportcat,
-        undercat,
-        wLanding,
-        womenpluscat,
-        add,
-        addPhoneGif,
-        appCircle,
-        appstore,
-        baby1,
-        backg,
-        button11,
-        carcat,
-        cardCoin,
-        deleteIconn,
-        fawri,
-        fawriArabic,
-        formFawri,
-        fullTshirt,
-        heart,
-        house,
-        icon,
-        iconChristmas,
-        icons8CheckMark501,
-        icons8CheckMark50,
-        icons8Delivery64,
-        icons8Paid30,
-        icons8Paid30Png,
-        icons8Received96,
-        icons8Shipping50,
-        icons8ShippingToDoor64,
-        icons8ShoppingBag502,
-        iconsalah,
-        iconsopt,
-        iconsss,
-        image,
-        image11,
-        inCart,
-        instagramLike,
-        menparfume,
-        noWifiGif,
-        orderDelivery,
-        perfume,
-        playstore,
-        salah,
-        share,
-        splash11,
-        tags,
-        tools,
-        tshirt,
-        video,
-        womenoerfume
-      ];
+    aLanding,
+    aPPICONGif,
+    aPPICONPng,
+    bagcat,
+    beautycat,
+    electCat,
+    fawriIcon,
+    homecat,
+    jwelerycat,
+    kLanding,
+    mencat,
+    opt,
+    officecat,
+    petcat,
+    pregcat,
+    shoescat,
+    sportcat,
+    undercat,
+    wLanding,
+    womenpluscat,
+    add,
+    addPhoneGif,
+    appCircle,
+    appstore,
+    baby1,
+    backg,
+    blackFridayLogo,
+    blackFridaySplash,
+    button11,
+    carcat,
+    cardCoin,
+    deleteIconn,
+    fawri,
+    fawriArabic,
+    formFawri,
+    fullTshirt,
+    heart,
+    house,
+    icon,
+    iconChristmas,
+    icons8CheckMark501,
+    icons8CheckMark50,
+    icons8Delivery64,
+    icons8Paid30,
+    icons8Paid30Png,
+    icons8Received96,
+    icons8Shipping50,
+    icons8ShippingToDoor64,
+    icons8ShoppingBag502,
+    iconsalah,
+    iconsopt,
+    iconsss,
+    image,
+    image11,
+    inCart,
+    instagramLike,
+    menparfume,
+    noWifiGif,
+    orderDelivery,
+    perfume,
+    playstore,
+    salah,
+    share,
+    splash11,
+    tags,
+    tools,
+    tshirt,
+    video,
+    womenoerfume,
+  ];
 }
 
 class $AssetsLottieGen {
@@ -624,6 +638,9 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/alert.json
   String get alert => 'assets/lottie/alert.json';
 
+  /// File path: assets/lottie/black friday.json
+  String get blackFriday => 'assets/lottie/black friday.json';
+
   /// File path: assets/lottie/buttonChristmas.json
   String get buttonChristmas => 'assets/lottie/buttonChristmas.json';
 
@@ -671,58 +688,59 @@ class $AssetsLottieGen {
 
   /// List of all assets
   List<String> get values => [
-        addPhone,
-        animation1701597212878,
-        animation1726302974575,
-        animation1726476947033,
-        animation1726740976006,
-        animation1729073541927,
-        bigSale,
-        cancelShopping,
-        check,
-        christmasBell,
-        christmasHat,
-        confettiPopper,
-        coupon,
-        eidSheep,
-        eleven,
-        error,
-        freeShipping,
-        hny,
-        happy1,
-        happy2,
-        islamicLantern,
-        merge,
-        merryChristmas,
-        mobileUpdate,
-        offer,
-        ramadanKareem,
-        ramadanLantern,
-        rating,
-        search1,
-        shoesSale,
-        snowMan,
-        spinWheel1,
-        surprise,
-        updateLottie,
-        adhaEid,
-        alert,
-        buttonChristmas,
-        cartempty,
-        eid,
-        emptyOrder,
-        emptyItems,
-        filter,
-        lightBulb,
-        noPoints,
-        noWifi,
-        noWifiLottie,
-        nowifi,
-        offerCircle,
-        order,
-        pointcoins,
-        sad
-      ];
+    addPhone,
+    animation1701597212878,
+    animation1726302974575,
+    animation1726476947033,
+    animation1726740976006,
+    animation1729073541927,
+    bigSale,
+    cancelShopping,
+    check,
+    christmasBell,
+    christmasHat,
+    confettiPopper,
+    coupon,
+    eidSheep,
+    eleven,
+    error,
+    freeShipping,
+    hny,
+    happy1,
+    happy2,
+    islamicLantern,
+    merge,
+    merryChristmas,
+    mobileUpdate,
+    offer,
+    ramadanKareem,
+    ramadanLantern,
+    rating,
+    search1,
+    shoesSale,
+    snowMan,
+    spinWheel1,
+    surprise,
+    updateLottie,
+    adhaEid,
+    alert,
+    blackFriday,
+    buttonChristmas,
+    cartempty,
+    eid,
+    emptyOrder,
+    emptyItems,
+    filter,
+    lightBulb,
+    noPoints,
+    noWifi,
+    noWifiLottie,
+    nowifi,
+    offerCircle,
+    order,
+    pointcoins,
+    sad,
+  ];
 }
 
 class $AssetsPdfsGen {
@@ -802,17 +820,17 @@ class $AssetsImagesGameImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        a35,
-        dash,
-        layer1Sky,
-        layer2Clouds,
-        layer3Clouds,
-        layer4Clouds,
-        layer5HugeClouds,
-        layer6Bushes,
-        layer7Bushes,
-        pipe
-      ];
+    a35,
+    dash,
+    layer1Sky,
+    layer2Clouds,
+    layer3Clouds,
+    layer4Clouds,
+    layer5HugeClouds,
+    layer6Bushes,
+    layer7Bushes,
+    pipe,
+  ];
 }
 
 class $AssetsImagesRatingGen {
@@ -860,17 +878,17 @@ class $AssetsImagesRatingGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        icAngry,
-        icAngryDisable,
-        icExcellent,
-        icExcellentDisable,
-        icHappy,
-        icHappyDisable,
-        icNeutral,
-        icNeutralDisable,
-        icSad,
-        icSadDisable
-      ];
+    icAngry,
+    icAngryDisable,
+    icExcellent,
+    icExcellentDisable,
+    icHappy,
+    icHappyDisable,
+    icNeutral,
+    icNeutralDisable,
+    icSad,
+    icSadDisable,
+  ];
 }
 
 class Assets {
@@ -950,15 +968,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
