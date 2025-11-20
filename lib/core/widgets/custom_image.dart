@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'custom_shimmer.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
+import 'web_image_widget_stub.dart'
+    if (dart.library.html) 'web_image_widget.dart';
 
 class CustomImageSponsored extends StatelessWidget {
   final String imageUrl;
@@ -45,30 +48,45 @@ class CustomImageSponsored extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.zero,
             padding: padding ?? EdgeInsets.only(bottom: 0.h),
-            child: CachedNetworkImage(
-              width: double.maxFinite,
-              height: height ?? 300.w,
-              key: ValueKey(imageUrl),
-              imageUrl: imageUrl,
-              fit: boxFit ?? BoxFit.fill,
-              filterQuality: FilterQuality.high,
-              alignment: Alignment.center,
-              memCacheHeight: (deviceHeight).toInt(),
-              placeholder: (context, url) => ShimmerImagePost(
-                borderRadius: borderRadius,
-                height: height ?? 300.w,
-              ),
-              errorWidget: (context, url, error) => Image(
-                image: AssetImage(
-                  Assets.images.image.path,
-                ),
-
-                // 90% of screen width
-                fit: BoxFit.contain,
-              ),
-            ),
+            child: kIsWeb
+                ? _buildWebImage()
+                : _buildMobileImage(deviceHeight),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildWebImage() {
+    // Use WebImageWidget which uses HTML ImageElement to bypass CORS
+    return WebImageWidget(
+      imageUrl: imageUrl,
+      height: height ?? 300.w,
+      boxFit: boxFit ?? BoxFit.fill,
+      borderRadius: borderRadius,
+    );
+  }
+
+  Widget _buildMobileImage(double deviceHeight) {
+    return CachedNetworkImage(
+      width: double.maxFinite,
+      height: height ?? 300.w,
+      key: ValueKey(imageUrl),
+      imageUrl: imageUrl,
+      fit: boxFit ?? BoxFit.fill,
+      filterQuality: FilterQuality.high,
+      alignment: Alignment.center,
+      memCacheHeight: deviceHeight.toInt(),
+      placeholder: (context, url) => ShimmerImagePost(
+        borderRadius: borderRadius,
+        height: height ?? 300.w,
+      ),
+      errorWidget: (context, url, error) => Image(
+        image: AssetImage(
+          Assets.images.image.path,
+        ),
+        // 90% of screen width
+        fit: BoxFit.contain,
       ),
     );
   }
