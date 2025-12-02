@@ -1,0 +1,293 @@
+// Local fallback data for sizes - Only used if remote fetch and cache both fail
+// This file serves as emergency backup when network is unavailable
+
+const Map<String, dynamic> appSizesDataJson = {
+  "men": {
+    "sizesList": {
+      "XS": "34",
+      "S": "36",
+      "M": "38",
+      "L": "40",
+      "XL": "42",
+      "XXL": "44",
+      "XXXL": "46",
+      "0XL": "48",
+      "1XL": "50",
+      "2XL": "52",
+      "3XL": "54",
+      "4XL": "56",
+      "5XL": "58",
+      "6XL": "60"
+    },
+    "sizesMap": {
+      "XS": false,
+      "S": false,
+      "M": false,
+      "L": false,
+      "XL": false,
+      "XXL": false,
+      "XXXL": false,
+      "0XL": false,
+      "1XL": false,
+      "2XL": false,
+      "3XL": false,
+      "4XL": false,
+      "5XL": false,
+      "6XL": false
+    }
+  },
+  "women": {
+    "sizesList": {
+      "XXS": "32",
+      "XS": "34",
+      "S": "36",
+      "M": "38",
+      "L": "40",
+      "XL": "42",
+      "XXL": "44",
+      "XXXL": "46"
+    },
+    "sizesMap": {
+      "XXS": false,
+      "XS": false,
+      "S": false,
+      "M": false,
+      "L": false,
+      "XL": false,
+      "XXL": false,
+      "XXXL": false,
+      "0XL": false,
+      "1XL": false,
+      "2XL": false,
+      "3XL": false,
+      "4XL": false,
+      "5XL": false
+    }
+  },
+  "womenPlus": {
+    "sizesList": {
+      "0XL": "42",
+      "1XL": "44",
+      "2XL": "46",
+      "3XL": "48",
+      "4XL": "50",
+      "5XL": "52"
+    }
+  },
+  "kidsBoys": {
+    "sizesListSimple": [
+      "سنة واقل",
+      "2 سنة",
+      "3 سنة",
+      "4 سنة",
+      "5 سنة",
+      "6 سنة",
+      "7 سنة",
+      "8 سنة",
+      "9 سنة",
+      "10 سنة",
+      "11 سنة",
+      "12 سنة",
+      "13 سنة",
+      "14 سنة",
+      "15 سنة"
+    ],
+    "sizesMap": {
+      "2سنة": false,
+      "2-3سنة": false,
+      "3سنة": false,
+      "4سنة": false,
+      "5سنة": false,
+      "5-6سنة": false,
+      "6سنة": false,
+      "7سنة": false,
+      "8 سنة": false,
+      "9 سنة": false,
+      "10 سنة": false,
+      "9-10 سنة": false,
+      "11-12 سنة": false,
+      "12 سنة": false,
+      "12-13 سنة": false,
+      "13-14 سنة": false
+    }
+  },
+  "kidsGirls": {
+    "sizesListSimple": [
+      "سنة واقل",
+      "2 سنة",
+      "3 سنة",
+      "4 سنة",
+      "5 سنة",
+      "6 سنة",
+      "7 سنة",
+      "8 سنة",
+      "9 سنة",
+      "10 سنة",
+      "11 سنة",
+      "12 سنة",
+      "13 سنة",
+      "14 سنة",
+      "15 سنة"
+    ],
+    "sizesMap": {
+      "2سنة": false,
+      "2-3سنة": false,
+      "3سنة": false,
+      "4سنة": false,
+      "5سنة": false,
+      "5-6سنة": false,
+      "6سنة": false,
+      "7سنة": false,
+      "8 سنة": false,
+      "9 سنة": false,
+      "9-10 سنة": false,
+      "10 سنة": false,
+      "11-12 سنة": false,
+      "12 سنة": false,
+      "12-13 سنة": false,
+      "13-14 سنة": false
+    }
+  },
+  "womenShoes": {
+    "sizesListSimple": [
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "39-40",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ],
+    "sizesMap": {
+      "35": false,
+      "36": false,
+      "37": false,
+      "38": false,
+      "39": false,
+      "39-40": false,
+      "40": false,
+      "41": false,
+      "42": false,
+      "43": false,
+      "44": false
+    }
+  },
+  "menShoes": {
+    "sizesListSimple": [
+      "37",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46",
+      "47"
+    ],
+    "sizesMap": {
+      "37": false,
+      "39": false,
+      "40": false,
+      "41": false,
+      "42": false,
+      "43": false,
+      "44": false,
+      "45": false,
+      "46": false,
+      "47": false
+    }
+  },
+  "kidsShoes": {
+    "sizesListSimple": [
+      "21",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "41"
+    ],
+    "sizesMap": {
+      "21": false,
+      "23": false,
+      "24": false,
+      "25": false,
+      "26": false,
+      "27": false,
+      "28": false,
+      "29": false,
+      "30": false,
+      "31": false,
+      "32": false,
+      "33": false,
+      "34": false
+    }
+  },
+  "underwear": {
+    "sizesListSimple": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL",
+      "0XL",
+      "1XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "ONE SIZE"
+    ],
+    "sizesMap": {
+      "XS": false,
+      "S": false,
+      "M": false,
+      "L": false,
+      "XL": false,
+      "XXL": false,
+      "0XL": false,
+      "1XL": false,
+      "2XL": false,
+      "3XL": false,
+      "4XL": false,
+      "5XL": false
+    }
+  },
+  "weddingAndEvents": {
+    "sizesMap": {
+      "0XL": false,
+      "1XL": false,
+      "24": false,
+      "2XL": false,
+      "3XL": false,
+      "44": false,
+      "4XL": false,
+      "5XL": false,
+      "L": false,
+      "M": false,
+      "S": false,
+      "XL": false,
+      "XS": false,
+      "XXL": false
+    }
+  }
+};
+
