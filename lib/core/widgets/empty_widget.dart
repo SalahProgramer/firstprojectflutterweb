@@ -1,11 +1,11 @@
 import 'package:fawri_app_refactor/core/widgets/widgets_item_view/button_done.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../controllers/custom_page_controller.dart';
-import '../../views/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../utilities/global/app_global.dart';
+import '../utilities/routes.dart';
 import '../utilities/style/text_style.dart';
 import 'custom_button.dart';
 import 'lottie_widget.dart';
@@ -86,7 +86,7 @@ class EmptyWidget extends StatelessWidget {
                 onPressed: () async {
                   await customPageController.changeIndexPage(0);
                   await customPageController.changeIndexCategoryPage(1);
-                  NavigatorApp.navigateToRemoveUntil(Pages());
+                  NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
                 },
               )
           ],

@@ -2,11 +2,10 @@ import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../../../controllers/cart_controller.dart';
-import '../../../views/pages/cart/my_cart.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../custom_button.dart';
 
 class IconCart extends StatefulWidget {
@@ -52,7 +51,7 @@ class _IconCartState extends State<IconCart> {
             );
             await cartController.getCartItems();
 
-            NavigatorApp.push(ShowCaseWidget(builder: (context) => MyCart()));
+            NavigatorApp.pushName(AppRoutes.myCart);
           },
           colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
         ),

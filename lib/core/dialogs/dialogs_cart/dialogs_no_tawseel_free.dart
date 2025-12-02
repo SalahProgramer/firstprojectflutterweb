@@ -5,15 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:vibration/vibration.dart';
-
-import '../../../views/pages/checkout/first-screen/first_screen.dart';
-import '../../../views/pages/pages.dart';
+import '../../utilities/vibration_helper.dart';
 import '../../services/firebase/remote_config_firebase/remote_config_firebase.dart';
 import '../../../controllers/cart_controller.dart';
 import '../../../controllers/page_main_screen_controller.dart';
 import '../../../controllers/points_controller.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/print_looger.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
@@ -188,7 +186,7 @@ class _ShowGetNoTawseelState extends State<ShowGetNoTawseel> {
                             await customPageController.changeIndexPage(0);
                             await customPageController
                                 .changeIndexCategoryPage(1);
-                            NavigatorApp.navigateToRemoveUntil(Pages());
+                            NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
                           }),
                       ButtonDone(
                         text: "استمر في إتمام الطلب",
@@ -209,7 +207,7 @@ class _ShowGetNoTawseelState extends State<ShowGetNoTawseel> {
                                 await cartController.deleteItemAddedToCart();
                                 await cartController.getCartItems();
 
-                                Vibration.vibrate(duration: 100);
+                                await VibrationHelper.vibrate(duration: 100);
 
                                 await cartController.changeLoading(false);
                                 await cartController.changeButton(true);
@@ -270,10 +268,13 @@ class _ShowGetNoTawseelState extends State<ShowGetNoTawseel> {
                                         double.parse(cartController
                                             .totalItemsPrice
                                             .toString()));
-                                    NavigatorApp.push(CheckoutFirstScreen(
-                                      freeShipValue: freeShipValue,
-                                      items: cartController.cartItems,
-                                    ));
+                                    NavigatorApp.pushName(
+                                      AppRoutes.checkoutFirstScreen,
+                                      arguments: {
+                                        'freeShipValue': freeShipValue,
+                                        'items': cartController.cartItems,
+                                      },
+                                    );
                                   } else {
                                     if (double.parse(cartController
                                             .totalItemsPrice
@@ -290,10 +291,13 @@ class _ShowGetNoTawseelState extends State<ShowGetNoTawseel> {
                                           double.parse(cartController
                                               .totalItemsPrice
                                               .toString()));
-                                      NavigatorApp.push(CheckoutFirstScreen(
-                                        freeShipValue: freeShipValue,
-                                        items: cartController.cartItems,
-                                      ));
+                                      NavigatorApp.pushName(
+                                        AppRoutes.checkoutFirstScreen,
+                                        arguments: {
+                                          'freeShipValue': freeShipValue,
+                                          'items': cartController.cartItems,
+                                        },
+                                      );
                                     } else {
                                       await cartController.changeLoading(false);
                                       await pointsController.changeTotal(
@@ -305,10 +309,13 @@ class _ShowGetNoTawseelState extends State<ShowGetNoTawseel> {
                                           double.parse(cartController
                                               .totalItemsPrice
                                               .toString()));
-                                      NavigatorApp.push(CheckoutFirstScreen(
-                                        freeShipValue: freeShipValue,
-                                        items: cartController.cartItems,
-                                      ));
+                                      NavigatorApp.pushName(
+                                        AppRoutes.checkoutFirstScreen,
+                                        arguments: {
+                                          'freeShipValue': freeShipValue,
+                                          'items': cartController.cartItems,
+                                        },
+                                      );
                                     }
                                   }
                                 } else if (cartController

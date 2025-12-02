@@ -6,6 +6,7 @@ import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../../../controllers/custom_page_controller.dart';
 import '../../../../controllers/points_controller.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/utilities/style/text_style.dart';
 import '../../../../core/utilities/validations/validation.dart';
@@ -15,7 +16,6 @@ import '../../../../core/widgets/snackBarWidgets/snack_bar_style.dart';
 import '../../../../core/widgets/snackBarWidgets/snackbar_widget.dart';
 import '../../../../core/widgets/widget_text_field/can_custom_text_field.dart';
 import '../../../../core/widgets/widgets_item_view/button_done.dart';
-import '../../pages.dart';
 
 class CheckPointsOrder extends StatefulWidget {
   const CheckPointsOrder({super.key});
@@ -82,7 +82,7 @@ class _CheckPointsOrderState extends State<CheckPointsOrder> {
           if (Navigator.of(context).canPop() == true) {
             NavigatorApp.pop();
           } else {
-            NavigatorApp.pushReplacment(Pages());
+            NavigatorApp.pushReplacment(AppRoutes.pages);
 
             await customPageController.changeIndexPage(0);
             await customPageController.changeIndexCategoryPage(1);

@@ -3,16 +3,9 @@ import '../../../controllers/custom_page_controller.dart';
 import '../../../controllers/departments_controller.dart';
 import '../../../controllers/sub_main_categories_conrtroller.dart';
 import '../../../models/slider_model.dart';
-import '../../../views/pages/departments/departs/kids_types/kids_all.dart';
-import '../../../views/pages/departments/departs/men.dart';
-import '../../../views/pages/departments/departs/shoes_types/shoes.dart';
-import '../../../views/pages/departments/departs/underware.dart';
-import '../../../views/pages/departments/departs/women.dart';
-import '../../../views/pages/departments/departs/women_plus.dart';
-import '../../../views/pages/departments/page_dapartment.dart';
-import '../../../views/pages/home/home_screen/home_screen.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -87,13 +80,19 @@ class _SlideImageState extends State<SlideImage> {
                     await customPageController.changeIndexCategoryPage(1);
                     if (widget.withCategory) {
                       if (e.action.toString() == "5") {
-                        NavigatorApp.push(Shoes(
-                          category: CategoryModel.fromJson(basicCategories[5]),
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.shoes,
+                          arguments: {
+                            'category': CategoryModel.fromJson(basicCategories[5]),
+                          },
+                        );
                       } else if (e.action.toString() == "3") {
-                        NavigatorApp.push(KidsAll(
-                          category: CategoryModel.fromJson(basicCategories[2]),
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.kidsAll,
+                          arguments: {
+                            'category': CategoryModel.fromJson(basicCategories[2]),
+                          },
+                        );
                       } else if (e.action.toString() == "17") {
                         await departmentsController.clearMulti();
 
@@ -105,14 +104,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "ملابس رياضية",
-                          category: CategoryModel.fromJson(basicCategories[17]),
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "ملابس رياضية",
+                            'category': CategoryModel.fromJson(basicCategories[17]),
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "7") {
                         await departmentsController.clearMulti();
 
@@ -123,14 +125,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "للمنزل",
-                          category: CategoryModel.fromJson(basicCategories[9]),
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "للمنزل",
+                            'category': CategoryModel.fromJson(basicCategories[9]),
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       }
                       else if (e.action.toString() == "6") {
                         await departmentsController.clearMulti();
@@ -143,14 +148,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "للرضيع",
-                          showIconSizes: false,
-                          category: CategoryModel.fromJson(basicCategories[7]),
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "للرضيع",
+                            'showIconSizes': false,
+                            'category': CategoryModel.fromJson(basicCategories[7]),
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       }
                       else if (e.action.toString() == "10") {
                         await departmentsController.clearMulti();
@@ -163,14 +171,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "مجوهرات و ساعات",
-                          category: CategoryModel.fromJson(basicCategories[10]),
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "مجوهرات و ساعات",
+                            'category': CategoryModel.fromJson(basicCategories[10]),
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "9") {
                         await departmentsController.clearMulti();
 
@@ -182,14 +193,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "اكسسوارات",
-                          category: CategoryModel.fromJson(basicCategories[11]),
-                          sizes: '',
-                          showIconSizes: false,
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "اكسسوارات",
+                            'category': CategoryModel.fromJson(basicCategories[11]),
+                            'sizes': '',
+                            'showIconSizes': false,
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "13") {
                         await departmentsController.clearMulti();
 
@@ -198,14 +212,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController.setSubCategorySpecific(
                             CategoryModel.fromJson(basicCategories[15]));
-                        NavigatorApp.push(PageDapartment(
-                          title: "مستحضرات تجميلية",
-                          category: CategoryModel.fromJson(basicCategories[15]),
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "مستحضرات تجميلية",
+                            'category': CategoryModel.fromJson(basicCategories[15]),
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "16") {
                         await departmentsController.clearMulti();
 
@@ -217,14 +234,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "الكترونيات",
-                          showIconSizes: false,
-                          category: category[0],
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "الكترونيات",
+                            'showIconSizes': false,
+                            'category': category[0],
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "15") {
                         await departmentsController.clearMulti();
 
@@ -235,14 +255,17 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController
                             .setSubCategorySpecific(category[0]);
-                        NavigatorApp.push(PageDapartment(
-                          title: "حقائب",
-                          category: category[0],
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "حقائب",
+                            'category': category[0],
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "11") {
                         await departmentsController.clearMulti();
 
@@ -251,15 +274,18 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController.setSubCategorySpecific(
                             CategoryModel.fromJson(basicCategories[13]));
-                        NavigatorApp.push(PageDapartment(
-                          title:
-                              CategoryModel.fromJson(basicCategories[13]).name,
-                          showIconSizes: false,
-                          category: CategoryModel.fromJson(basicCategories[13]),
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title':
+                                CategoryModel.fromJson(basicCategories[13]).name,
+                            'showIconSizes': false,
+                            'category': CategoryModel.fromJson(basicCategories[13]),
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "12") {
                         await departmentsController.clearMulti();
 
@@ -268,15 +294,18 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController.setSubCategorySpecific(
                             CategoryModel.fromJson(basicCategories[12]));
-                        NavigatorApp.push(PageDapartment(
-                          title:
-                              CategoryModel.fromJson(basicCategories[12]).name,
-                          category: CategoryModel.fromJson(basicCategories[12]),
-                          showIconSizes: false,
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title':
+                                CategoryModel.fromJson(basicCategories[12]).name,
+                            'category': CategoryModel.fromJson(basicCategories[12]),
+                            'showIconSizes': false,
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else if (e.action.toString() == "14") {
                         await departmentsController.clearMulti();
 
@@ -285,31 +314,43 @@ class _SlideImageState extends State<SlideImage> {
 
                         await departmentsController.setSubCategorySpecific(
                             CategoryModel.fromJson(basicCategories[14]));
-                        NavigatorApp.push(PageDapartment(
-                          title:
-                              CategoryModel.fromJson(basicCategories[14]).name,
-                          showIconSizes: false,
-                          category: CategoryModel.fromJson(basicCategories[14]),
-                          sizes: '',
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title':
+                                CategoryModel.fromJson(basicCategories[14]).name,
+                            'showIconSizes': false,
+                            'category': CategoryModel.fromJson(basicCategories[14]),
+                            'sizes': '',
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       } else {
                         if (e.action.toString() == "2") {
-                          NavigatorApp.push(Women(
-                            category:
-                                CategoryModel.fromJson(basicCategories[0]),
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.women,
+                            arguments: {
+                              'category':
+                                  CategoryModel.fromJson(basicCategories[0]),
+                            },
+                          );
                         } else if (e.action.toString() == "1") {
-                          NavigatorApp.push(Men(
-                            category:
-                                CategoryModel.fromJson(basicCategories[1]),
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.men,
+                            arguments: {
+                              'category':
+                                  CategoryModel.fromJson(basicCategories[1]),
+                            },
+                          );
                         } else if (e.action.toString() == "4") {
-                          NavigatorApp.push(WomenPlus(
-                            category:
-                                CategoryModel.fromJson(basicCategories[3]),
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.womenPlus,
+                            arguments: {
+                              'category':
+                                  CategoryModel.fromJson(basicCategories[3]),
+                            },
+                          );
                         }
 
                         // else if (e.action.toString() == "18") {
@@ -317,24 +358,27 @@ class _SlideImageState extends State<SlideImage> {
                         // }
 
                         else if (e.action.toString() == "8") {
-                          NavigatorApp.push(Underware());
+                          NavigatorApp.pushName(AppRoutes.underware);
                         }
                       }
                     } else {
-                      NavigatorApp.push(HomeScreen(
-                        bannerTitle: "",
-                        endDate: "",
-                        hasAppBar: true,
-                        type: "normal",
-                        productsKinds: false,
-                        title: e.title.toString() == ""
-                            ? "سلايدر 1 سلايدر 1"
-                            : e.title,
-                        url: e.action,
-                        scrollController:
-                            subMainCategoriesController.scrollSlidersItems,
-                        slider: true,
-                      ));
+                      NavigatorApp.pushName(
+                        AppRoutes.homeScreen,
+                        arguments: {
+                          'bannerTitle': "",
+                          'endDate': "",
+                          'hasAppBar': true,
+                          'type': "normal",
+                          'productsKinds': false,
+                          'title': e.title.toString() == ""
+                              ? "سلايدر 1 سلايدر 1"
+                              : e.title,
+                          'url': e.action,
+                          'scrollController':
+                              subMainCategoriesController.scrollSlidersItems,
+                          'slider': true,
+                        },
+                      );
                     }
                   },
                   child: Container(

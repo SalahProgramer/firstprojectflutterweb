@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:glowy_borders/glowy_borders.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
 
+import '../../../utilities/vibration_helper.dart';
 import '../../../../controllers/APIS/api_product_item.dart';
 import '../../../../controllers/fetch_controller.dart';
 import '../../../../controllers/page_main_screen_controller.dart';
@@ -14,9 +14,9 @@ import '../../../../controllers/product_item_controller.dart';
 import '../../../../controllers/favourite_controller.dart';
 import '../../../../models/items/item_model.dart';
 import '../../../utilities/global/app_global.dart';
+import '../../../utilities/routes.dart';
 import '../../../utilities/style/colors.dart';
 import '../../../utilities/style/text_style.dart';
-import '../../../../views/pages/home/main_screen/product_item_view.dart';
 import '../../custom_image.dart';
 import '../../custom_shimmer.dart';
 import '../../custom_text.dart';
@@ -79,15 +79,18 @@ class CustomImagesStyleTwo extends StatelessWidget {
           await productItemController.clearItemsData();
           await apiProductItemController.cancelRequests();
 
-          NavigatorApp.push(ProductItemView(
-            item: item,
-            isFeature: isFeature,
-            sizes: '',
-            isFlashOrBest: (isLoadingProduct ==
-                    pageMainScreenController.isLoadingItemViewedProducts)
-                ? true
-                : false,
-          ));
+          NavigatorApp.pushName(
+            AppRoutes.productItemView,
+            arguments: {
+              'item': item,
+              'isFeature': isFeature,
+              'sizes': '',
+              'isFlashOrBest': (isLoadingProduct ==
+                      pageMainScreenController.isLoadingItemViewedProducts)
+                  ? true
+                  : false,
+            },
+          );
         },
         child: Stack(
           alignment: Alignment.topRight,
@@ -359,7 +362,7 @@ class CustomImagesStyleTwo extends StatelessWidget {
                                                                       .newPrice,
                                                                   tags:
                                                                       '$tags');
-                                                          Vibration.vibrate(
+                                                          await VibrationHelper.vibrate(
                                                               duration: 100);
 
                                                           // await pageMainScreenController.changeIsFavourite(

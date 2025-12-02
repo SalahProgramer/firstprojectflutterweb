@@ -9,11 +9,11 @@ import '../../../controllers/search_controller.dart';
 
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../widgets/lottie_widget.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/widgets_item_view/pop_up_shoes.dart';
 import '../dialog_waiting/dialog_waiting.dart';
 
 AnalyticsService analyticsService = AnalyticsService();
@@ -93,7 +93,12 @@ Future<void> showPopUpShoesDialog() {
                   await searchItemController.setSizesPopUpShoes(isMale: true);
                   await searchItemController.getShoesPopUp(isMale: true);
                   NavigatorApp.pop();
-                  NavigatorApp.push(PopUpShoes(isMale: true));
+                  NavigatorApp.pushName(
+                    AppRoutes.popUpShoes,
+                    arguments: {
+                      'isMale': true,
+                    },
+                  );
                 },
                 textWaiting: '',
               ),
@@ -122,7 +127,12 @@ Future<void> showPopUpShoesDialog() {
                   await searchItemController.setSizesPopUpShoes(isMale: false);
                   await searchItemController.getShoesPopUp(isMale: false);
                   NavigatorApp.pop();
-                  NavigatorApp.push(PopUpShoes(isMale: false));
+                  NavigatorApp.pushName(
+                    AppRoutes.popUpShoes,
+                    arguments: {
+                      'isMale': false,
+                    },
+                  );
                 },
                 textWaiting: '',
               ),

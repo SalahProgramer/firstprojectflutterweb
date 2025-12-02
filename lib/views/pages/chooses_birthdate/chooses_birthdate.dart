@@ -10,6 +10,7 @@ import '../../../controllers/custom_page_controller.dart';
 import '../../../core/firebase/user/user_model.dart';
 import '../../../core/firebase/user/user_controller.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import '../../../core/utilities/style/text_style.dart';
 import '../../../core/utilities/print_looger.dart';
@@ -18,8 +19,6 @@ import '../../../core/widgets/widgets_item_view/button_done.dart';
 import '../../../core/widgets/snackBarWidgets/snack_bar_style.dart';
 import '../../../core/widgets/snackBarWidgets/snackbar_widget.dart';
 import '../../../core/dialogs/dialog_waiting/dialog_waiting.dart';
-import '../pages.dart';
-import '../orders/new_orders.dart';
 
 
 class ChooseBirthdate extends StatefulWidget {
@@ -68,7 +67,7 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
 
             await customPageController.changeIndexPage(0);
             await customPageController.changeIndexCategoryPage(1);
-            NavigatorApp.pushReplacment(Pages());
+            NavigatorApp.pushReplacment(AppRoutes.pages);
           } else if (widget.select == 1) {
             NavigatorApp.pop();
 
@@ -77,10 +76,13 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
             String userID = prefs.getString('user_id') ?? "";
             String phone = prefs.getString('phone') ?? "";
 
-            NavigatorApp.pushReplacment(OrdersPages(
-              userId: userID.toString(),
-              phone: phone,
-            ));
+            NavigatorApp.pushReplacment(
+              AppRoutes.ordersPages,
+              arguments: {
+                'userId': userID.toString(),
+                'phone': phone,
+              },
+            );
           } else if (widget.select == 11) {
             NavigatorApp.pop();
           } else {
@@ -88,7 +90,7 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
 
             await customPageController.changeIndexPage(0);
             await customPageController.changeIndexCategoryPage(1);
-            NavigatorApp.pushReplacment(Pages());
+            NavigatorApp.pushReplacment(AppRoutes.pages);
           }
         },
         actions: [],
@@ -282,7 +284,7 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
                                 await customPageController.changeIndexPage(0);
                                 await customPageController
                                     .changeIndexCategoryPage(1);
-                                NavigatorApp.pushReplacment(Pages());
+                                NavigatorApp.pushReplacment(AppRoutes.pages);
                               } else if (widget.select == 1) {
                                 NavigatorApp.pop();
                                 SharedPreferences prefs =
@@ -290,15 +292,18 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
                                 String phone = prefs.getString('phone') ?? "";
                                 String userID =
                                     prefs.getString('user_id') ?? "";
-                                NavigatorApp.pushReplacment(OrdersPages(
-                                  userId: userID.toString(),
-                                  phone: phone,
-                                ));
+                                NavigatorApp.pushReplacment(
+                                  AppRoutes.ordersPages,
+                                  arguments: {
+                                    'userId': userID.toString(),
+                                    'phone': phone,
+                                  },
+                                );
                               } else if (widget.select == 11) {
                                 NavigatorApp.pop();
                               } else {
                                 NavigatorApp.pop();
-                                NavigatorApp.pushReplacment(Pages());
+                                NavigatorApp.pushReplacment(AppRoutes.pages);
                               }
                             }
                           }),
@@ -310,7 +315,7 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
 
                           await customPageController.changeIndexPage(0);
                           await customPageController.changeIndexCategoryPage(1);
-                          NavigatorApp.pushReplacment(Pages());
+                          NavigatorApp.pushReplacment(AppRoutes.pages);
                         } else if (widget.select == 1) {
                           NavigatorApp.pop();
 
@@ -319,16 +324,19 @@ class _ChooseBirthdateState extends State<ChooseBirthdate> {
 
                           String userID = prefs.getString('user_id') ?? "";
                           String phone = prefs.getString('phone') ?? "";
-                          NavigatorApp.pushReplacment(OrdersPages(
-                            userId: userID.toString(),
-                            phone: phone,
-                          ));
+                          NavigatorApp.pushReplacment(
+                            AppRoutes.ordersPages,
+                            arguments: {
+                              'userId': userID.toString(),
+                              'phone': phone,
+                            },
+                          );
                         } else if (widget.select == 11) {
                           NavigatorApp.pop();
                         } else {
                           NavigatorApp.pop();
 
-                          NavigatorApp.pushReplacment(Pages());
+                          NavigatorApp.pushReplacment(AppRoutes.pages);
                         }
                       },
                       child: Text(

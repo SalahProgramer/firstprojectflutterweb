@@ -3,6 +3,7 @@ import '../../../controllers/cart_controller.dart';
 import '../../../controllers/custom_page_controller.dart';
 import '../../../controllers/order_controller.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/print_looger.dart';
 import '../../../core/utilities/style/colors.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,6 @@ import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/empty_widget.dart';
 import '../../../core/widgets/widgets_carts/how_to_delete_card.dart';
 import '../../../core/widgets/widgets_carts/widget_each_card.dart';
-import '../orders/new_orders.dart';
-import '../pages.dart';
 import 'button_cart.dart';
 
 class MyCart extends StatefulWidget {
@@ -78,7 +77,7 @@ class _MyCartState extends State<MyCart> {
           } else {
             await customPageController.changeIndexPage(0);
             await customPageController.changeIndexCategoryPage(1);
-            NavigatorApp.navigateToRemoveUntil(Pages());
+            NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
           }
         },
         actions: [
@@ -90,10 +89,13 @@ class _MyCartState extends State<MyCart> {
               String phone = prefs.getString('phone') ?? "";
               String userId = prefs.getString('user_id') ?? "";
 
-              NavigatorApp.push(OrdersPages(
-                phone: phone,
-                userId: userId,
-              ));
+              NavigatorApp.pushName(
+                AppRoutes.ordersPages,
+                arguments: {
+                  'phone': phone,
+                  'userId': userId,
+                },
+              );
             },
             backColor: Colors.transparent,
             height: 28.h,

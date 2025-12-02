@@ -9,14 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vibration/vibration.dart';
 
+import '../../../../core/utilities/vibration_helper.dart';
 import '../../../../controllers/checkout_controller.dart';
 import '../../../../controllers/order_controller.dart';
 import '../../../../controllers/points_controller.dart';
 import '../../../../core/services/database/models_DB/cart_model.dart';
 import '../../../../core/utilities/functions.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/utilities/style/text_style.dart';
 import '../../../../core/widgets/app_bar_widgets/app_bar_custom.dart';
@@ -24,8 +25,6 @@ import '../../../../core/widgets/lottie_widget.dart';
 import '../../../../core/widgets/snackBarWidgets/snack_bar_style.dart';
 import '../../../../core/widgets/snackBarWidgets/snackbar_widget.dart';
 import '../../../../core/widgets/widgets_item_view/button_done.dart';
-import '../../checkout_order/first_screen_checkout/check_points_order.dart';
-import '../second-screen/second_screen.dart';
 
 
 class CheckoutFirstScreen extends StatefulWidget {
@@ -98,7 +97,7 @@ class _CheckoutFirstScreenState extends State<CheckoutFirstScreen> {
                         title: "قم باختيار منطقتك", type: SnackBarType.warning);
                     setState(() {
                       _hasError = true;
-                      Vibration.vibrate(duration: 100);
+                      VibrationHelper.vibrate(duration: 100);
                       Future.delayed(Duration(milliseconds: 1000), () {
                         setState(() {
                           _hasError = false;
@@ -110,62 +109,64 @@ class _CheckoutFirstScreenState extends State<CheckoutFirstScreen> {
                     await orderControllerSalah.changeLoading1(false);
                     printLog(pointsController.shekelText.trim().toString());
 
-                    NavigatorApp.push(
-                      CheckoutSecondScreen(
-                        totalWithoutDelivery: pointsController.total.round(),
-                        pointControllerText: (pointsController.pointApplied)
+                    NavigatorApp.pushName(
+                      AppRoutes.checkoutSecondScreen,
+                      arguments: {
+                        'totalWithoutDelivery': pointsController.total.round(),
+                        'pointControllerText': (pointsController.pointApplied)
                             ? pointsController.pointsController.text
                                 .trim()
                                 .toString()
                             : "0",
-                        usedWheelCoupon: wheelApplied,
-                        initialCity:
+                        'usedWheelCoupon': wheelApplied,
+                        'initialCity':
                             checkoutController.dropdownValue.toString(),
-                        couponControllerText: (couponMessage ==
+                        'couponControllerText': (couponMessage ==
                                     "الكوبون المدخل مستخدم من قبل , الرجاء المحاولة فيما بعد" ||
                                 couponMessage == "" ||
                                 couponMessage == "تم استخدام الكوبون من قبل")
                             ? ""
                             : couponController.text,
-                        total: ((checkoutController.deliveryPrice) +
+                        'total': ((checkoutController.deliveryPrice) +
                                 pointsController.total)
                             .round()
                             .toStringAsFixed(2),
-                        delivery: (checkoutController.deliveryPrice)
+                        'delivery': (checkoutController.deliveryPrice)
                             .round()
                             .toStringAsFixed(2),
-                      ),
+                      },
                     );
                   } else {
                     await orderControllerSalah.changeLoading1(false);
 
                     printLog(pointsController.shekelText.trim().toString());
 
-                    NavigatorApp.push(
-                      CheckoutSecondScreen(
-                        totalWithoutDelivery: pointsController.total.round(),
-                        usedWheelCoupon: wheelApplied,
-                        delivery: ((checkoutController.deliveryPrice)
+                    NavigatorApp.pushName(
+                      AppRoutes.checkoutSecondScreen,
+                      arguments: {
+                        'totalWithoutDelivery': pointsController.total.round(),
+                        'usedWheelCoupon': wheelApplied,
+                        'delivery': ((checkoutController.deliveryPrice)
                             .round()
                             .toStringAsFixed(2)),
-                        pointControllerText: (pointsController.pointApplied)
+                        'pointControllerText': (pointsController.pointApplied)
                             ? pointsController.pointsController.text
                                 .trim()
                                 .toString()
                             : "0",
-                        initialCity:
+                        'initialCity':
                             checkoutController.dropdownValue.toString(),
-                        couponControllerText: (couponMessage ==
+                        'couponControllerText': (couponMessage ==
                                     "الكوبون المدخل مستخدم من قبل , الرجاء المحاولة فيما بعد" ||
                                 couponMessage == "" ||
                                 couponMessage == "تم استخدام الكوبون من قبل")
                             ? ""
                             : couponController.text,
-                        total: (checkoutController.deliveryPrice +
+                        'total': (checkoutController.deliveryPrice +
                                 pointsController.total)
                             .round()
                             .toStringAsFixed(2),
-                      ),
+                      },
                     );
                   }
                 })),
@@ -363,7 +364,7 @@ class _CheckoutFirstScreenState extends State<CheckoutFirstScreen> {
                           overlayColor: WidgetStateColor.transparent,
                           focusColor: Colors.transparent,
                           onTap: () {
-                            NavigatorApp.pushAnimation(CheckPointsOrder());
+                            NavigatorApp.pushAnimation(AppRoutes.checkPointsOrder);
                           },
                           child: Column(
                             children: [

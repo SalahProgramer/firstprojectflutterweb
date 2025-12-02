@@ -8,10 +8,10 @@ import '../../../controllers/page_main_screen_controller.dart';
 import '../../../controllers/product_item_controller.dart';
 import '../../../controllers/search_controller.dart';
 import '../../../models/constants/constant_model.dart';
-import '../../../views/pages/home/main_screen/product_item_view.dart';
 import '../../../views/pages/searchandfilterandgame/customs_bottom_sheets.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/print_looger.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
@@ -184,10 +184,13 @@ class _WidgetDropDownSearchState extends State<WidgetDropDownSearch> {
                     if (productItemController.isTrue == true) {
                       await searchController.changeLoadingSearch(false);
                       await apiProductItemController.cancelRequests();
-                      NavigatorApp.push(ProductItemView(
-                        item: productItemController.specificItemData!,
-                        sizes: '',
-                      ));
+                      NavigatorApp.pushName(
+                        AppRoutes.productItemView,
+                        arguments: {
+                          'item': productItemController.specificItemData!,
+                          'sizes': '',
+                        },
+                      );
                     }
                     await searchController.changeLoadingSearch(false);
                   })

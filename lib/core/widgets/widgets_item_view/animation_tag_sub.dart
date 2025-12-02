@@ -11,6 +11,7 @@ import '../../../models/items/item_model.dart';
 import '../../../views/pages/home/home_screen/home_screen.dart';
 import '../../constants/domain.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../lottie_widget.dart';
@@ -122,12 +123,15 @@ class _AnimationTagInSubsState extends State<AnimationTagInSub>
               onTap: () async {
                 await subMainCategoriesController.clear();
                 String tagName = item.toString();
-                NavigatorApp.push(homeScreenWidget(
-                  bannerTitle: tagName.toString(),
-                  type: tagName.toString(),
-                  url: urlFLASHSALES,
-                  scroll: subMainCategoriesController.scrollDynamicItems,
-                ));
+                NavigatorApp.pushName(
+                  AppRoutes.homeScreen,
+                  arguments: {
+                    'bannerTitle': tagName.toString(),
+                    'type': tagName.toString(),
+                    'url': urlFLASHSALES,
+                    'scrollController': subMainCategoriesController.scrollDynamicItems,
+                  },
+                );
               },
               child: (item.toString() == "2025")
                   ? Container(

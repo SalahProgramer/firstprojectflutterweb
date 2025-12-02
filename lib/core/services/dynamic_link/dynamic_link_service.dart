@@ -24,6 +24,9 @@ class DynamicLinkService {
               bundleId: "co.fawri.fawri", minimumVersion: '1.0.0'),
           socialMetaTagParameters: SocialMetaTagParameters(
               description: "", imageUrl: Uri.parse(image), title: title));
+      // TODO: Migrate away from Firebase Dynamic Links before August 25, 2025
+      // Consider alternatives: Branch.io, AppsFlyer OneLink, or custom deep linking
+      // ignore: deprecated_member_use
       final ShortDynamicLink shortDynamicLink =
           await FirebaseDynamicLinks.instance.buildShortLink(parameters);
 
@@ -46,6 +49,7 @@ class DynamicLinkService {
 
   Future<void> initDynamicLink() async {
     try {
+      // ignore: deprecated_member_use
       final PendingDynamicLinkData? initialLink =
           await FirebaseDynamicLinks.instance.getInitialLink();
 
@@ -53,6 +57,7 @@ class DynamicLinkService {
         initialUri = initialLink!.link;
       }
 
+      // ignore: deprecated_member_use
       FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) async {
         handleDynamicLink(uri: dynamicLinkData.link);
       }).onError((error) {

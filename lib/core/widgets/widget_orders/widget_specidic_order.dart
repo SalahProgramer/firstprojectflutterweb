@@ -1,4 +1,3 @@
-import 'package:fawri_app_refactor/core/widgets/widget_orders/specific_description_item_in_order.dart';
 import 'package:fawri_app_refactor/core/widgets/widget_orders/widget_text_grid.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 
@@ -16,11 +15,11 @@ import '../../../controllers/product_item_controller.dart';
 import '../../../models/items/item_model.dart';
 import '../../../models/items/variants_model.dart';
 import '../../../models/order/order_detail_model.dart';
-import '../../../views/pages/orders/order_details.dart';
 import '../../dialogs/dialogs_order/dialogs_order.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../helpers/changes.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/print_looger.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
@@ -334,17 +333,19 @@ class _WidgetSpecificOrderState extends State<WidgetSpecificOrder> {
                                                       .newestOrder
                                                       .listItemOrder![index]
                                                       .id));
-                                          NavigatorApp.push(
-                                              SpecificDescriptionItemInOrder(
-                                            item: item,
-                                            indexVariants: widget
-                                                .newestOrder
-                                                .listItemOrder![index]
-                                                .variantIndex,
-                                            isFavourite: favourite,
-                                            specificOrder: widget.newestOrder
-                                                .listItemOrder![index],
-                                          ));
+                                          NavigatorApp.pushName(
+                                            AppRoutes.specificDescriptionItemInOrder,
+                                            arguments: {
+                                              'item': item,
+                                              'indexVariants': widget
+                                                  .newestOrder
+                                                  .listItemOrder![index]
+                                                  .variantIndex,
+                                              'isFavourite': favourite,
+                                              'specificOrder': widget.newestOrder
+                                                  .listItemOrder![index],
+                                            },
+                                          );
                                         },
                                         child: Card(
                                           color: Colors.black12,
@@ -556,11 +557,14 @@ class _WidgetSpecificOrderState extends State<WidgetSpecificOrder> {
                                                   },
                                                 );
 
-                                                NavigatorApp.push(OrderDetails(
-                                                  newestOrder:
-                                                      widget.newestOrder,
-                                                  done: false,
-                                                ));
+                                                NavigatorApp.pushName(
+                                                  AppRoutes.orderDetails,
+                                                  arguments: {
+                                                    'newestOrder':
+                                                        widget.newestOrder,
+                                                    'done': false,
+                                                  },
+                                                );
                                               },
                                             ),
                                           ),

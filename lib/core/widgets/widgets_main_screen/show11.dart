@@ -1,10 +1,10 @@
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/fetch_controller.dart';
 import '../../../controllers/sub_main_categories_conrtroller.dart';
-import '../../../views/pages/home/home_screen/home_screen.dart';
 import '../custom_image.dart';
 
 class Show11 extends StatefulWidget {
@@ -30,19 +30,20 @@ class _Show11State extends State<Show11> {
                 onTap: () async {
                   await subMainCategoriesController.clear();
 
-                  NavigatorApp.push(
-                    HomeScreen(
-                      bannerTitle: "🎊 ${fetchController.setShow11.trim()} 🎊",
-                      endDate: "",
-                      type: fetchController.setShow11.trim(),
-                      url: "",
-                      title: "",
-                      slider: false,
-                      hasAppBar: true,
-                      scrollController:
+                  NavigatorApp.pushName(
+                    AppRoutes.homeScreen,
+                    arguments: {
+                      'bannerTitle': "🎊 ${fetchController.setShow11.trim()} 🎊",
+                      'endDate': "",
+                      'type': fetchController.setShow11.trim(),
+                      'url': "",
+                      'title': "",
+                      'slider': false,
+                      'hasAppBar': true,
+                      'scrollController':
                           subMainCategoriesController.scrollDynamicItems,
-                      productsKinds: false,
-                    ),
+                      'productsKinds': false,
+                    },
                   );
                 },
                 child: CustomImageSponsored(

@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:vibration/vibration.dart';
+import '../../utilities/vibration_helper.dart';
 import '../../../views/pages/cart/widget_have_offer.dart';
-import '../../../views/pages/checkout/first-screen/first_screen.dart';
 import '../../constants/domain.dart';
 import '../../services/firebase/remote_config_firebase/remote_config_firebase.dart';
 import '../../../controllers/cart_controller.dart';
@@ -17,13 +16,13 @@ import '../../../controllers/fetch_controller.dart';
 import '../../../controllers/points_controller.dart';
 import '../../../controllers/sub_main_categories_conrtroller.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/print_looger.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/lottie_widget.dart';
 import '../../widgets/widgets_item_view/button_done.dart';
-import '../../widgets/widgets_main_screen/home_screen_widget.dart';
 import '../dialog_waiting/dialog_waiting.dart';
 import '../dialogs_cart/dialogs_cart_delete_and_check_available.dart';
 import '../dialogs_cart/dialogs_no_tawseel_free.dart';
@@ -148,13 +147,21 @@ Future<void> dialogOffer(
                                         .changeIndexCategoryPage(1);
                                     await subMainCategoriesController.clear();
                                     String tagName = fetchController.offer;
-                                    NavigatorApp.push(homeScreenWidget(
-                                      bannerTitle: tagName.toString(),
-                                      type: tagName.toString(),
-                                      url: urlFLASHSALES,
-                                      scroll: subMainCategoriesController
-                                          .scrollDynamicItems,
-                                    ));
+                                    NavigatorApp.pushName(
+                                      AppRoutes.homeScreen,
+                                      arguments: {
+                                        'bannerTitle': tagName.toString(),
+                                        'type': tagName.toString(),
+                                        'url': urlFLASHSALES,
+                                        'scrollController': subMainCategoriesController
+                                            .scrollDynamicItems,
+                                        'hasAppBar': true,
+                                        'endDate': '',
+                                        'title': '',
+                                        'slider': false,
+                                        'productsKinds': true,
+                                      },
+                                    );
                                   }),
                               CustomButtonWithIconWithoutBackground(
                                   text: "متابعة الشراء",
@@ -167,7 +174,7 @@ Future<void> dialogOffer(
                                     printLog(
                                         cartController.cartItems[0].toString());
 
-                                    Vibration.vibrate(duration: 100);
+                                    await VibrationHelper.vibrate(duration: 100);
 
                                     await cartController.changeLoading(false);
 
@@ -201,10 +208,13 @@ Future<void> dialogOffer(
                                             double.parse(cartController
                                                 .totalItemsPrice
                                                 .toString()));
-                                        NavigatorApp.push(CheckoutFirstScreen(
-                                          freeShipValue: freeShipValue,
-                                          items: cartController.cartItems,
-                                        ));
+                                        NavigatorApp.pushName(
+                                          AppRoutes.checkoutFirstScreen,
+                                          arguments: {
+                                            'freeShipValue': freeShipValue,
+                                            'items': cartController.cartItems,
+                                          },
+                                        );
                                       } else {
                                         if (double.parse(cartController
                                                 .totalItemsPrice
@@ -222,10 +232,13 @@ Future<void> dialogOffer(
                                               .changeTotalItems(double.parse(
                                                   cartController.totalItemsPrice
                                                       .toString()));
-                                          NavigatorApp.push(CheckoutFirstScreen(
-                                            freeShipValue: freeShipValue,
-                                            items: cartController.cartItems,
-                                          ));
+                                          NavigatorApp.pushName(
+                                            AppRoutes.checkoutFirstScreen,
+                                            arguments: {
+                                              'freeShipValue': freeShipValue,
+                                              'items': cartController.cartItems,
+                                            },
+                                          );
                                         } else {
                                           NavigatorApp.pop();
                                           double remainder = ((double.parse(
@@ -462,13 +475,21 @@ Future<void> dialogHaveHappyOffer(
                                     .changeIndexCategoryPage(1);
                                 await subMainCategoriesController.clear();
                                 String tagName = fetchController.offer;
-                                NavigatorApp.push(homeScreenWidget(
-                                  bannerTitle: tagName.toString(),
-                                  type: tagName.toString(),
-                                  url: urlFLASHSALES,
-                                  scroll: subMainCategoriesController
-                                      .scrollDynamicItems,
-                                ));
+                                NavigatorApp.pushName(
+                                  AppRoutes.homeScreen,
+                                  arguments: {
+                                    'bannerTitle': tagName.toString(),
+                                    'type': tagName.toString(),
+                                    'url': urlFLASHSALES,
+                                    'scrollController': subMainCategoriesController
+                                        .scrollDynamicItems,
+                                    'hasAppBar': true,
+                                    'endDate': '',
+                                    'title': '',
+                                    'slider': false,
+                                    'productsKinds': true,
+                                  },
+                                );
                               },
                             ),
                           SizedBox(height: 5.h),
@@ -497,7 +518,7 @@ Future<void> dialogHaveHappyOffer(
                                 printLog(
                                     cartController.cartItems[0].toString());
 
-                                Vibration.vibrate(duration: 100);
+                                await VibrationHelper.vibrate(duration: 100);
 
                                 await cartController.changeLoading(true);
 
@@ -557,10 +578,13 @@ Future<void> dialogHaveHappyOffer(
                                             .totalItemsPrice
                                             .toString()));
 
-                                    NavigatorApp.push(CheckoutFirstScreen(
-                                      freeShipValue: freeShipValue,
-                                      items: cartController.cartItems,
-                                    ));
+                                    NavigatorApp.pushName(
+                                      AppRoutes.checkoutFirstScreen,
+                                      arguments: {
+                                        'freeShipValue': freeShipValue,
+                                        'items': cartController.cartItems,
+                                      },
+                                    );
                                   } else {
                                     if (double.parse(cartController
                                             .totalItemsPrice
@@ -577,10 +601,13 @@ Future<void> dialogHaveHappyOffer(
                                           double.parse(cartController
                                               .totalItemsPrice
                                               .toString()));
-                                      NavigatorApp.push(CheckoutFirstScreen(
-                                        freeShipValue: freeShipValue,
-                                        items: cartController.cartItems,
-                                      ));
+                                      NavigatorApp.pushName(
+                                        AppRoutes.checkoutFirstScreen,
+                                        arguments: {
+                                          'freeShipValue': freeShipValue,
+                                          'items': cartController.cartItems,
+                                        },
+                                      );
                                     } else {
                                       NavigatorApp.pop();
                                       double remainder = ((double.parse(

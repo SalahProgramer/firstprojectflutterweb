@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
+import '../../utilities/vibration_helper.dart';
 import 'package:fawri_app_refactor/models/items/item_model.dart';
 import 'package:fawri_app_refactor/core/services/dynamic_link/dynamic_link_service.dart';
 import 'package:fawri_app_refactor/core/utilities/style/colors.dart';
@@ -205,7 +205,7 @@ class _DescriptionSpecaficItemState extends State<DescriptionSpecaficItem> {
                         newPrice: widget.item.newPrice,
                         tags: '$tags',
                       );
-                      Vibration.vibrate(duration: 100);
+                      await VibrationHelper.vibrate(duration: 100);
 
                       // await pageMainScreenController.changeIsFavourite(
                       //     widget.item.id.toString(),

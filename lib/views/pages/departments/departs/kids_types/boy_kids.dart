@@ -6,9 +6,9 @@ import '../../../../../controllers/custom_page_controller.dart';
 import '../../../../../controllers/departments_controller.dart';
 import '../../../../../core/services/database/hive_data/data_sizes.dart';
 import '../../../../../core/utilities/global/app_global.dart';
+import '../../../../../core/utilities/routes.dart';
 import '../../../../../core/widgets/departments_home_widgets/widget_each_department.dart';
 import '../../../../../models/constants/constant_model.dart';
-import '../../page_dapartment.dart';
 
 class BoyKids extends StatefulWidget {
   const BoyKids({super.key});
@@ -45,13 +45,16 @@ class _BoyKidsState extends State<BoyKids> {
             .where((entry) => entry.value) // Filter only `true` values
             .map((entry) => entry.key) // Get the keys (clothing names)
             .join(","); // Join into a single string
-        NavigatorApp.push(PageDapartment(
-          title: "قسم الأولاد",
-          showIconSizes: true,
-          category: category[0],
-          sizes: sizes ?? "",
-          scrollController: departmentsController.scrollMultiItems,
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.pageDepartment,
+          arguments: {
+            'title': "قسم الأولاد",
+            'showIconSizes': true,
+            'category': category[0],
+            'sizes': sizes ?? "",
+            'scrollController': departmentsController.scrollMultiItems,
+          },
+        );
       },
       onPressedSkip: () async {
         await departmentsController.clearAll();
@@ -62,12 +65,15 @@ class _BoyKidsState extends State<BoyKids> {
             .setSubCategorySpecificFirstMulti(category[0]);
         await customPageController.changeIndexCategoryPage(1);
 
-        NavigatorApp.push(PageDapartment(
-          title: "قسم الأولاد",
-          showIconSizes: true,
-          category: category[0],
-          scrollController: departmentsController.scrollMultiItems,
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.pageDepartment,
+          arguments: {
+            'title': "قسم الأولاد",
+            'showIconSizes': true,
+            'category': category[0],
+            'scrollController': departmentsController.scrollMultiItems,
+          },
+        );
       },
     );
   }

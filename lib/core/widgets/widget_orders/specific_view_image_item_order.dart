@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
+import '../../utilities/vibration_helper.dart';
 import '../../../controllers/favourite_controller.dart';
 import '../../../controllers/fetch_controller.dart';
 import '../../../controllers/page_main_screen_controller.dart';
@@ -52,7 +52,7 @@ class _SpecificViewImageItemOrderState
           InkWell(
             onDoubleTap: () async {
               // Trigger vibration
-              Vibration.vibrate(duration: 100);
+              await VibrationHelper.vibrate(duration: 100);
 
               if (await favouriteController.checkFavouriteItem(
                       productId: widget.item.id) ==

@@ -5,6 +5,7 @@ import '../../../controllers/cart_controller.dart';
 import '../../../controllers/page_main_screen_controller.dart';
 import '../../../controllers/product_item_controller.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -12,7 +13,6 @@ import 'package:provider/provider.dart';
 import '../../../controllers/favourite_controller.dart';
 import '../../../controllers/sub_main_categories_conrtroller.dart';
 import '../../../views/pages/home/home_screen/count-down-time-widget/count_down_time_widget.dart';
-import '../../../views/pages/home/main_screen/product_item_view.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
@@ -301,12 +301,15 @@ class _SubItemsState extends State<SubItems> {
                           await productItemController.clearItemsData();
                           await apiProductItemController.cancelRequests();
 
-                          NavigatorApp.push(ProductItemView(
-                            item: subMainCategoriesController
-                                .subCategories[index],
-                            isFeature: false,
-                            sizes: '',
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.productItemView,
+                            arguments: {
+                              'item': subMainCategoriesController
+                                  .subCategories[index],
+                              'isFeature': false,
+                              'sizes': '',
+                            },
+                          );
                         },
                         child: UiSpecificSubMain(
                           favourite: favourite,

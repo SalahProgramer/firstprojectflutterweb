@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:vibration/vibration.dart';
+import '../../core/utilities/vibration_helper.dart';
 import '../../controllers/user_controller.dart';
 import '../../core/dialogs/dialog_waiting/dialog_waiting.dart';
 import '../../core/utilities/style/text_style.dart';
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textWaiting: "قيد الإنتظار ...",
                     loadingButton: userController.isLoading,
                     onPressed: () async {
-                      Vibration.vibrate(duration: 100);
+                      await VibrationHelper.vibrate(duration: 100);
                       userController.changeLoading();
                       userController.addUser();
                     },

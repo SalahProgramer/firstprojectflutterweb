@@ -11,9 +11,9 @@ import '../../../../controllers/page_main_screen_controller.dart';
 import '../../../../controllers/product_item_controller.dart';
 import '../../../../models/items/item_model.dart';
 import '../../../utilities/global/app_global.dart';
+import '../../../utilities/routes.dart';
 import '../../../utilities/style/colors.dart';
 import '../../../utilities/style/text_style.dart';
-import '../../../../views/pages/home/main_screen/product_item_view.dart';
 import '../../custom_image.dart';
 import '../../custom_text.dart';
 import '../../lottie_widget.dart';
@@ -71,11 +71,14 @@ class CustomImagesStyleThree extends StatelessWidget {
           await productItemController.clearItemsData();
           await apiProductItemController.cancelRequests();
 
-          NavigatorApp.push(ProductItemView(
-            item: item,
-            isFeature: isFeature,
-            sizes: '',
-          ));
+          NavigatorApp.pushName(
+            AppRoutes.productItemView,
+            arguments: {
+              'item': item,
+              'isFeature': isFeature,
+              'sizes': '',
+            },
+          );
         },
         child: Stack(
           alignment: Alignment.topRight,

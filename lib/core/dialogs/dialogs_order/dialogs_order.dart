@@ -7,14 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
-import '../../../views/pages/chooses_birthdate/chooses_birthdate.dart';
-import '../../../views/pages/orders/new_orders.dart';
-import '../../../views/pages/pages.dart';
 import '../../services/sentry/sentry_service.dart';
 import '../../../controllers/custom_page_controller.dart';
 import '../../../controllers/order_controller.dart';
 import '../../utilities/functions.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../utilities/validations/validation.dart';
@@ -47,7 +45,7 @@ Future<void> dialogErrorOrder() {
                       NavigatorApp.pop();
                       await customPageController.changeIndexPage(0);
                       await customPageController.changeIndexCategoryPage(1);
-                      NavigatorApp.navigateToRemoveUntil(Pages());
+                      NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
                     },
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height,
@@ -121,7 +119,7 @@ Future<void> dialogErrorOrder() {
 
                                 await customPageController
                                     .changeIndexCategoryPage(1);
-                                NavigatorApp.navigateToRemoveUntil(Pages());
+                                NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
                               })
                         ],
                       ),
@@ -283,18 +281,21 @@ Future<void> dialogSuccessOrder(
                   bool? show = prefs.getBool('show_birthday') ?? true;
 
                   if (show) {
-                    NavigatorApp.push(ChooseBirthdate(
-                      name: nameController.text,
-                      phoneController: phoneController.text,
-                      token: token.toString(),
-                      userID: userID.toString(),
-                      selectedArea: selectedArea.toString(),
-                      select: 2,
-                    ));
+                    NavigatorApp.pushName(
+                      AppRoutes.chooseBirthdate,
+                      arguments: {
+                        'name': nameController.text,
+                        'phoneController': phoneController.text,
+                        'token': token.toString(),
+                        'userID': userID.toString(),
+                        'selectedArea': selectedArea.toString(),
+                        'select': 2,
+                      },
+                    );
                   } else {
                     await customPageController.changeIndexPage(0);
                     await customPageController.changeIndexCategoryPage(1);
-                    NavigatorApp.pushReplacment(Pages());
+                    NavigatorApp.pushReplacment(AppRoutes.pages);
                   }
                 },
                 child: Column(
@@ -334,18 +335,21 @@ Future<void> dialogSuccessOrder(
                         bool? show = prefs.getBool('show_birthday') ?? true;
 
                         if (show) {
-                          NavigatorApp.push(ChooseBirthdate(
-                            name: nameController.text,
-                            phoneController: phoneController.text,
-                            token: token.toString(),
-                            userID: userID.toString(),
-                            selectedArea: selectedArea.toString(),
-                            select: 0,
-                          ));
+                    NavigatorApp.pushName(
+                      AppRoutes.chooseBirthdate,
+                      arguments: {
+                        'name': nameController.text,
+                        'phoneController': phoneController.text,
+                        'token': token.toString(),
+                        'userID': userID.toString(),
+                        'selectedArea': selectedArea.toString(),
+                        'select': 0,
+                      },
+                    );
                         } else {
                           await customPageController.changeIndexPage(0);
                           await customPageController.changeIndexCategoryPage(1);
-                          NavigatorApp.pushReplacment(Pages());
+                          NavigatorApp.pushReplacment(AppRoutes.pages);
                         }
                       },
                       text: "الصفحة الرئيسية",
@@ -364,23 +368,29 @@ Future<void> dialogSuccessOrder(
                         bool? show = prefs.getBool('show_birthday') ?? true;
 
                         if (show) {
-                          NavigatorApp.push(ChooseBirthdate(
-                            name: nameController.text,
-                            phoneController: phoneController.text,
-                            token: token.toString(),
-                            userID: userID.toString(),
-                            selectedArea: selectedArea.toString(),
-                            select: 1,
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.chooseBirthdate,
+                            arguments: {
+                              'name': nameController.text,
+                              'phoneController': phoneController.text,
+                              'token': token.toString(),
+                              'userID': userID.toString(),
+                              'selectedArea': selectedArea.toString(),
+                              'select': 1,
+                            },
+                          );
                         } else {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           String? phone = prefs.getString("phone");
 
-                          NavigatorApp.pushReplacment(OrdersPages(
-                            userId: userID.toString(),
-                            phone: phone ?? "",
-                          ));
+                          NavigatorApp.pushReplacment(
+                            AppRoutes.ordersPages,
+                            arguments: {
+                              'userId': userID.toString(),
+                              'phone': phone ?? "",
+                            },
+                          );
                         }
                       },
                       text: "تتبع طلبياتي",

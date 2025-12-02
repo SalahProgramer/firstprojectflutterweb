@@ -5,12 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/departments_controller.dart';
 import '../../../models/constants/constant_model.dart';
-import '../../../views/pages/departments/departs/shoes_types/men_shoes.dart';
-import '../../../views/pages/departments/departs/shoes_types/women_shoes.dart';
-import '../../../views/pages/departments/departs/underware.dart';
-import '../../../views/pages/departments/page_dapartment.dart';
 import '../../constants/constant_data/constant_data_convert.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/text_style.dart';
 import '../custom_button.dart';
 
@@ -74,10 +71,10 @@ class _SubDepartmentMultiSelectionsState
                     if (Navigator.canPop(context)) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        NavigatorApp.push(MenShoes());
+                        NavigatorApp.pushName(AppRoutes.menShoes);
                       });
                     } else {
-                      NavigatorApp.push(MenShoes());
+                      NavigatorApp.pushName(AppRoutes.menShoes);
                     }
                     dontHave = false;
                     break;
@@ -85,10 +82,10 @@ class _SubDepartmentMultiSelectionsState
                     if (Navigator.canPop(context)) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        NavigatorApp.push(Underware());
+                        NavigatorApp.pushName(AppRoutes.underware);
                       });
                     } else {
-                      NavigatorApp.push(Underware());
+                      NavigatorApp.pushName(AppRoutes.underware);
                     }
                     dontHave = false;
                     break;
@@ -105,24 +102,30 @@ class _SubDepartmentMultiSelectionsState
                     if (Navigator.canPop(context)) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        NavigatorApp.push(PageDapartment(
-                          title: "اكسسوارات",
-                          category: category[0],
-                          sizes: '',
-                          showIconSizes: false,
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "اكسسوارات",
+                            'category': category[0],
+                            'sizes': '',
+                            'showIconSizes': false,
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       });
                     } else {
-                      NavigatorApp.push(PageDapartment(
-                        title: "اكسسوارات",
-                        category: category[0],
-                        sizes: '',
-                        showIconSizes: false,
-                        scrollController:
-                            departmentsController.scrollMultiItems,
-                      ));
+                      NavigatorApp.pushName(
+                        AppRoutes.pageDepartment,
+                        arguments: {
+                          'title': "اكسسوارات",
+                          'category': category[0],
+                          'sizes': '',
+                          'showIconSizes': false,
+                          'scrollController':
+                              departmentsController.scrollMultiItems,
+                        },
+                      );
                     }
                     dontHave = false;
                     break;
@@ -139,24 +142,30 @@ class _SubDepartmentMultiSelectionsState
                     if (Navigator.canPop(context)) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        NavigatorApp.push(PageDapartment(
-                          title: "الموضة والجمال",
-                          category: category[0],
-                          sizes: '',
-                          showIconSizes: false,
-                          scrollController:
-                              departmentsController.scrollMultiItems,
-                        ));
+                        NavigatorApp.pushName(
+                          AppRoutes.pageDepartment,
+                          arguments: {
+                            'title': "الموضة والجمال",
+                            'category': category[0],
+                            'sizes': '',
+                            'showIconSizes': false,
+                            'scrollController':
+                                departmentsController.scrollMultiItems,
+                          },
+                        );
                       });
                     } else {
-                      NavigatorApp.push(PageDapartment(
-                        title: "الموضة والجمال",
-                        category: category[0],
-                        sizes: '',
-                        showIconSizes: false,
-                        scrollController:
-                            departmentsController.scrollMultiItems,
-                      ));
+                      NavigatorApp.pushName(
+                        AppRoutes.pageDepartment,
+                        arguments: {
+                          'title': "الموضة والجمال",
+                          'category': category[0],
+                          'sizes': '',
+                          'showIconSizes': false,
+                          'scrollController':
+                              departmentsController.scrollMultiItems,
+                        },
+                      );
                     }
 
                     dontHave = false;
@@ -166,11 +175,11 @@ class _SubDepartmentMultiSelectionsState
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.popUntil(context, (route) => route.isFirst);
                         // Ensure push happens after popUntil completes
-                        NavigatorApp.push(WomenShoes());
+                        NavigatorApp.pushName(AppRoutes.womenShoes);
                       });
                     } else {
                       // If already at the first route, directly push the new screen
-                      NavigatorApp.push(WomenShoes());
+                      NavigatorApp.pushName(AppRoutes.womenShoes);
                     }
                     dontHave = false;
                     break;

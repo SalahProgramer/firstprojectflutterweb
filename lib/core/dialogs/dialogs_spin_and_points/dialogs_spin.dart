@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controllers/page_main_screen_controller.dart';
-import '../../../views/pages/spining_wheel/spin_wheel.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../widgets/custom_button.dart';
@@ -120,7 +120,7 @@ Future<void> dialogDoSpin() {
                                   if (phone == "") {
                                     await showAddPhone();
                                   } else {
-                                    NavigatorApp.push(SpinWheel());
+                                    NavigatorApp.pushName(AppRoutes.spinWheel);
                                   }
                                 }),
                           ],

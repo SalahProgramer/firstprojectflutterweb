@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../models/order/order_detail_model.dart';
-import '../../../views/pages/orders/order_details.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../custom_button.dart';
@@ -200,10 +200,13 @@ class _WidgetSpacificOrderInHomeState extends State<WidgetSpacificOrderInHome> {
                           heightIconInStartEnd: 20.w,
                           haveBouncingWidget: false,
                           onPressed: () {
-                            NavigatorApp.push(OrderDetails(
-                              newestOrder: widget.newestOrder,
-                              done: false,
-                            ));
+                            NavigatorApp.pushName(
+                              AppRoutes.orderDetails,
+                              arguments: {
+                                'newestOrder': widget.newestOrder,
+                                'done': false,
+                              },
+                            );
                           },
                         ),
                       ],

@@ -1,12 +1,12 @@
 import 'package:fawri_app_refactor/controllers/product_item_controller.dart';
 import 'package:fawri_app_refactor/core/utilities/global/app_global.dart';
+import 'package:fawri_app_refactor/core/utilities/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:fawri_app_refactor/controllers/APIS/api_product_item.dart';
 import 'package:fawri_app_refactor/controllers/page_main_screen_controller.dart';
 import 'package:fawri_app_refactor/core/utilities/style/text_style.dart';
-import 'package:fawri_app_refactor/views/pages/home/main_screen/product_item_view.dart';
 import 'package:fawri_app_refactor/core/widgets/custom_image.dart';
 
 class CardBestSallerWidget extends StatefulWidget {
@@ -43,10 +43,14 @@ class _CardBestSallerWidgetState extends State<CardBestSallerWidget> {
             0);
         await productItemController.clearItemsData();
         await apiProductItemController.cancelRequests();
-        NavigatorApp.push(ProductItemView(
-            item: pageMainScreenController.bestSellersProducts[widget.index],
-            isFlashOrBest: true,
-            sizes: ""));
+        NavigatorApp.pushName(
+          AppRoutes.productItemView,
+          arguments: {
+            'item': pageMainScreenController.bestSellersProducts[widget.index],
+            'isFlashOrBest': true,
+            'sizes': "",
+          },
+        );
       },
       child: Container(
         margin: EdgeInsets.all(4.w),

@@ -12,12 +12,12 @@ import '../../../controllers/product_item_controller.dart';
 
 import '../../../models/items/item_model.dart';
 import '../../../models/items/variants_model.dart';
-import '../../../views/pages/home/main_screen/product_item_view.dart';
 import '../../dialogs/dialog_waiting/dialog_waiting.dart';
 import '../../dialogs/dialogs_favourite/dialogs_favourite.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../services/database/models_DB/favourite_model.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../custom_button.dart';
@@ -101,10 +101,13 @@ class _WidgetFavouriteCardState extends State<WidgetFavouriteCard> {
             widget.favouriteItem.productId.toString(), 0);
         await productItemController.clearItemsData();
         await apiProductItemController.resetRequests();
-        NavigatorApp.push(ProductItemView(
-          item: item,
-          sizes: '',
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.productItemView,
+          arguments: {
+            'item': item,
+            'sizes': '',
+          },
+        );
       },
       child: SlidableCartWidget(
         index: widget.index,

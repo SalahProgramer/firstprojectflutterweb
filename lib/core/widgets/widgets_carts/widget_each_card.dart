@@ -4,6 +4,7 @@ import 'package:fawri_app_refactor/controllers/fetch_controller.dart';
 import 'package:fawri_app_refactor/controllers/product_item_controller.dart';
 import 'package:fawri_app_refactor/models/items/item_model.dart';
 import 'package:fawri_app_refactor/core/utilities/global/app_global.dart';
+import 'package:fawri_app_refactor/core/utilities/routes.dart';
 import 'package:fawri_app_refactor/core/utilities/style/colors.dart';
 import 'package:fawri_app_refactor/core/utilities/style/text_style.dart';
 import 'package:fawri_app_refactor/core/widgets/custom_button.dart';
@@ -15,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glowy_borders/glowy_borders.dart';
 import 'package:provider/provider.dart';
-import 'package:fawri_app_refactor/views/pages/home/main_screen/product_item_view.dart';
 import 'package:fawri_app_refactor/controllers/APIS/api_product_item.dart';
 import 'package:fawri_app_refactor/controllers/cart_controller.dart';
 import 'package:fawri_app_refactor/controllers/page_main_screen_controller.dart';
@@ -235,12 +235,13 @@ class WidgetEachCard extends StatelessWidget {
                     );
                     await productItemController.clearItemsData();
                     await apiProductItemController.cancelRequests();
-                    NavigatorApp.push(
-                      ProductItemView(
-                        item: item,
-                        indexVariants: cartItem!.indexVariants,
-                        sizes: "",
-                      ),
+                    NavigatorApp.pushName(
+                      AppRoutes.productItemView,
+                      arguments: {
+                        'item': item,
+                        'indexVariants': cartItem!.indexVariants,
+                        'sizes': "",
+                      },
                     );
                   },
                   child: Stack(

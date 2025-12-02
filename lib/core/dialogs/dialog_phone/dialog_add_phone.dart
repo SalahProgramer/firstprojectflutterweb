@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../../controllers/points_controller.dart';
-import '../../../views/pages/spining_wheel/spin_wheel.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../utilities/validations/validation.dart';
@@ -218,7 +218,7 @@ class _ShowAddPhoneState extends State<ShowAddPhone> {
                                               .getEnumStatus('2')
                                               .canUse ==
                                           true)) {
-                                        NavigatorApp.push(SpinWheel());
+                                        NavigatorApp.pushName(AppRoutes.spinWheel);
                                       }
                                     }
                                     pointsController.phoneController.clear();

@@ -11,18 +11,17 @@ import '../../../controllers/fetch_controller.dart';
 import '../../../controllers/page_main_screen_controller.dart';
 import '../../../controllers/product_item_controller.dart';
 import '../../../models/items/item_model.dart';
-import '../../../views/pages/cart/my_cart.dart';
 import '../../dialogs/dialogs_cart/dialogs_cart_delete_and_check_available.dart';
 import '../../services/analytics/analytics_service.dart';
 import '../../utilities/print_looger.dart';
+import '../../utilities/routes.dart';
 import '../../utilities/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:showcaseview/showcaseview.dart';
-import 'package:vibration/vibration.dart';
+import '../../utilities/vibration_helper.dart';
 import '../../services/notifications/notification_service.dart';
 import '../../utilities/global/app_global.dart';
 import '../app_bar_widgets/app_bar_custom.dart';
@@ -183,7 +182,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
                       "time": DateTime.now().toString(),
                     },
                   );
-                  Vibration.vibrate(duration: 100);
+                  await VibrationHelper.vibrate(duration: 100);
                   await onPopDeleteCartItem(
                     id: "${widget.item.id}00${productItemController.indexItems[widget.item.id.toString()].toString()}",
                   );
@@ -207,7 +206,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
                         false &&
                     productItemController.update == true)
               ? () async {
-                  Vibration.vibrate(duration: 100);
+                  await VibrationHelper.vibrate(duration: 100);
 
                   await productItemController.changeLoadingButtonCart(true);
                   await productItemController.changeNoChoiceSize(false);
@@ -244,7 +243,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
               : (productItemController.allItems.isEmpty)
               ? null
               : () async {
-                  Vibration.vibrate(duration: 100);
+                  await VibrationHelper.vibrate(duration: 100);
 
                   await productItemController.changeLoadingButtonCart(true);
 
@@ -447,9 +446,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
                       );
                       await cartController.getCartItems();
 
-                      NavigatorApp.push(
-                        ShowCaseWidget(builder: (context) => MyCart()),
-                      );
+                      NavigatorApp.pushName(AppRoutes.myCart);
                     },
                     colorFilter: ColorFilter.mode(
                       Colors.black,
@@ -497,7 +494,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
                               InkWell(
                                 onDoubleTap: () async {
                                   // Trigger vibration
-                                  Vibration.vibrate(duration: 100);
+                                  await VibrationHelper.vibrate(duration: 100);
 
                                   if (await favouriteController
                                           .checkFavouriteItem(

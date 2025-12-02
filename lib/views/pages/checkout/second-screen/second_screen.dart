@@ -28,6 +28,7 @@ import '../../../../core/services/database/models_DB/address_item_model.dart';
 import '../../../../core/services/database/models_DB/cart_model.dart';
 import '../../../../core/utilities/functions.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/utilities/style/text_style.dart';
 import '../../../../core/widgets/app_bar_widgets/app_bar_custom.dart';
@@ -35,8 +36,6 @@ import '../../../../core/widgets/widget_text_field/can_custom_text_field.dart';
 import '../../../../core/widgets/widgets_item_view/button_done.dart';
 import '../../../../models/address/Area/area.dart';
 import '../../../../models/address/City/city.dart';
-import '../../pages.dart';
-import '../add-address/add_address.dart';
 
 class CheckoutSecondScreen extends StatefulWidget {
   final dynamic total;
@@ -445,7 +444,7 @@ class _CheckoutSecondScreenState extends State<CheckoutSecondScreen> {
                             await customPageController
                                 .changeIndexCategoryPage(1);
 
-                            NavigatorApp.navigateToRemoveUntil(Pages());
+                            NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
                           }
                         } else {
                           await orderControllerSalah.changeLoading3(false);
@@ -754,7 +753,7 @@ class _CheckoutSecondScreenState extends State<CheckoutSecondScreen> {
                       child: InkWell(
                         onTap: () async {
                           // The region is already set in CheckoutController, just navigate
-                          NavigatorApp.push(AddAddress());
+                          NavigatorApp.pushName(AppRoutes.addAddress);
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,

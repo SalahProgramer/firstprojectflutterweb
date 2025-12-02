@@ -11,6 +11,7 @@ import '../../../controllers/points_controller.dart';
 import '../../../controllers/address_provider.dart';
 import '../../../core/services/database/models_DB/address_item_model.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import '../../../core/utilities/style/text_style.dart';
 import '../../../core/utilities/validations/validation.dart';
@@ -19,9 +20,6 @@ import '../../../core/widgets/widgets_item_view/button_done.dart';
 import '../../../core/widgets/widget_text_field/can_custom_text_field.dart';
 import '../../../core/dialogs/dialog_update_profile.dart';
 import '../../../core/dialogs/dialog_phone/dialog_add_phone.dart';
-import '../checkout/add-address/add_address.dart';
-import '../chooses_birthdate/chooses_birthdate.dart';
-import '../points/users_points.dart';
 
 class AccountInformation extends StatefulWidget {
   final dynamic name, address, area, city, phone, birthday;
@@ -106,7 +104,7 @@ class AaccounIinformationState extends State<AccountInformation> {
                   children: [
                     InkWell(
                       onTap: () {
-                        NavigatorApp.push(UsersPointsPage());
+                        NavigatorApp.pushName(AppRoutes.usersPointsPage);
                       },
                       borderRadius: BorderRadius.circular((25.r)),
                       child: Container(
@@ -335,15 +333,16 @@ class AaccounIinformationState extends State<AccountInformation> {
                                                   }
 
                                                   if (phone != "") {
-                                                    NavigatorApp.push(
-                                                      ChooseBirthdate(
-                                                        name: "",
-                                                        phoneController: phone,
-                                                        select: 11,
-                                                        selectedArea: "",
-                                                        token: "",
-                                                        userID: "",
-                                                      ),
+                                                    NavigatorApp.pushName(
+                                                      AppRoutes.chooseBirthdate,
+                                                      arguments: {
+                                                        'name': "",
+                                                        'phoneController': phone,
+                                                        'select': 11,
+                                                        'selectedArea': "",
+                                                        'token': "",
+                                                        'userID': "",
+                                                      },
                                                     );
                                                   }
                                                 },
@@ -526,11 +525,11 @@ class AaccounIinformationState extends State<AccountInformation> {
                                               ),
                                               child: InkWell(
                                                 onTap: () {
-                                                  NavigatorApp.push(
-                                                    const AddAddress(
-                                                      loadAllCities:
-                                                          true, // Load all cities from account_information
-                                                    ),
+                                                  NavigatorApp.pushName(
+                                                    AppRoutes.addAddress,
+                                                    arguments: {
+                                                      'loadAllCities': true,
+                                                    },
                                                   );
                                                 },
                                                 child: Row(

@@ -6,13 +6,11 @@ import '../../../../../controllers/custom_page_controller.dart';
 import '../../../../../controllers/departments_controller.dart';
 import '../../../../../core/services/analytics/analytics_service.dart';
 import '../../../../../core/utilities/global/app_global.dart';
+import '../../../../../core/utilities/routes.dart';
 import '../../../../../core/widgets/departments_home_widgets/button_types.dart';
 import '../../../../../core/widgets/departments_home_widgets/widget_each_department.dart';
 import '../../../../../models/constants/constant_model.dart';
 
-import '../../page_dapartment.dart';
-import 'boy_kids.dart';
-import 'girl_kids.dart';
 
 class KidsAll extends StatefulWidget {
   final CategoryModel category;
@@ -55,7 +53,7 @@ class _KidsAllState extends State<KidsAll> {
               },
             );
 
-            NavigatorApp.push(BoyKids());
+            NavigatorApp.pushName(AppRoutes.boyKids);
           },
         ),
         ButtonTypes(
@@ -73,7 +71,7 @@ class _KidsAllState extends State<KidsAll> {
               },
             );
 
-            NavigatorApp.push(GirlKids());
+            NavigatorApp.pushName(AppRoutes.girlKids);
 
             // await departmentsController
             //     .changeLoadingShoes(
@@ -105,13 +103,16 @@ class _KidsAllState extends State<KidsAll> {
                 womenAndBaby, false);
 
             await departmentsController.setSubCategorySpecific(category[0]);
-            NavigatorApp.push(PageDapartment(
-              title: 'الرضيع',
-              showIconSizes: false,
-              category: CategoryModel.fromJson(basicCategories[7]),
-              sizes: '',
-              scrollController: departmentsController.scrollMultiItems,
-            ));
+            NavigatorApp.pushName(
+              AppRoutes.pageDepartment,
+              arguments: {
+                'title': 'الرضيع',
+                'showIconSizes': false,
+                'category': CategoryModel.fromJson(basicCategories[7]),
+                'sizes': '',
+                'scrollController': departmentsController.scrollMultiItems,
+              },
+            );
           },
         ),
         ButtonTypes(
@@ -138,13 +139,16 @@ class _KidsAllState extends State<KidsAll> {
             await departmentsController.setSubCategorySpecific(category[0]);
             await customPageController.changeIndexCategoryPage(1);
 
-            NavigatorApp.push(PageDapartment(
-              title: widget.category.name,
-              showIconSizes: false,
-              category: widget.category,
-              sizes: '',
-              scrollController: departmentsController.scrollMultiItems,
-            ));
+            NavigatorApp.pushName(
+              AppRoutes.pageDepartment,
+              arguments: {
+                'title': widget.category.name,
+                'showIconSizes': false,
+                'category': widget.category,
+                'sizes': '',
+                'scrollController': departmentsController.scrollMultiItems,
+              },
+            );
           },
         ),
       ],

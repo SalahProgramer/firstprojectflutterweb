@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:vibration/vibration.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../core/utilities/vibration_helper.dart';
 import '../../../controllers/fetch_controller.dart';
 import '../../../controllers/points_controller.dart';
 import '../../../core/dialogs/dialog_waiting/dialog_waiting.dart';
@@ -14,9 +14,9 @@ import '../../../controllers/cart_controller.dart';
 import '../../../controllers/page_main_screen_controller.dart';
 import '../../../core/services/firebase/remote_config_firebase/remote_config_firebase.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/print_looger.dart';
 import '../../../core/widgets/widgets_item_view/button_done.dart';
-import '../checkout/first-screen/first_screen.dart';
 
 class ButtonCart extends StatelessWidget {
   final ItemScrollController scrollController;
@@ -37,7 +37,7 @@ class ButtonCart extends StatelessWidget {
 
 
     try {
-      Vibration.vibrate(duration: 100);
+      await VibrationHelper.vibrate(duration: 100);
       await cartController.changeLoading(true);
       dialogWaiting();
 
@@ -68,7 +68,7 @@ class ButtonCart extends StatelessWidget {
         NavigatorApp.pop(); // Close waiting dialog
         
         // Vibrate to alert user about warning messages
-        Vibration.vibrate(duration: 500, amplitude: 200);
+        await VibrationHelper.vibrate(duration: 500, amplitude: 200);
         
         // Find first item with warning message and scroll to it
         for (int i = 0; i < cartController.availability.length; i++) {
@@ -108,10 +108,13 @@ class ButtonCart extends StatelessWidget {
           await pointsController.changeTotalItems(double.parse(cartController.totalItemsPrice.toString()));
           
           // Navigate to checkout
-          NavigatorApp.push(CheckoutFirstScreen(
-            freeShipValue: freeShipValue,
-            items: cartController.cartItems,
-          ));
+          NavigatorApp.pushName(
+            AppRoutes.checkoutFirstScreen,
+            arguments: {
+              'freeShipValue': freeShipValue,
+              'items': cartController.cartItems,
+            },
+          );
         } else {
 
             // Cart total is below threshold, show waiting dialog and no tawseel dialog
@@ -157,7 +160,7 @@ class ButtonCart extends StatelessWidget {
         await cartController.changeLoading(false);
         NavigatorApp.pop();
         
-                Vibration.vibrate(duration: 500, amplitude: 200);
+        await VibrationHelper.vibrate(duration: 500, amplitude: 200);
  // Close waiting dialog
         await scrollController.scrollTo(
           index: cartController.availabilityWithFalseItems

@@ -9,11 +9,11 @@ import '../../../controllers/page_main_screen_controller.dart';
 import '../../../controllers/user_controller.dart';
 import '../../../controllers/wheel_controller.dart';
 import '../../../views/pages/home/main_screen/newest_order_in_home.dart';
-import '../../../views/pages/spining_wheel/spin_wheel.dart';
 import '../../dialogs/dialog_phone/dialog_add_phone.dart';
 import '../../dialogs/dialogs_spin_and_points/dialogs_spin.dart';
 import '../../utilities/audio_player_extensions.dart';
 import '../../utilities/global/app_global.dart';
+import '../../utilities/routes.dart';
 import 'custom_button_spin.dart';
 
 class ButtonSpinOrder extends StatefulWidget {
@@ -103,7 +103,7 @@ class _ButtonSpinOrderState extends State<ButtonSpinOrder> {
                       if (phone == "") {
                         await showAddPhone();
                       } else {
-                        NavigatorApp.push(SpinWheel());
+                        NavigatorApp.pushName(AppRoutes.spinWheel);
                       }
                     }
                   : () {
