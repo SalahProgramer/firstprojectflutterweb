@@ -1,13 +1,14 @@
 {
-    "name": "firstprojectflutterweb",
-    "short_name": "firstprojectflutterweb",
+    "name": "Fawri - فوري",
+    "short_name": "Fawri",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFFFFF",
+    "theme_color": "#000000",
+    "description": "Fawri Shopping App - تطبيق فوري للتسوق",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    "scope": "/",
     "icons": [
         {
             "src": "icons/Icon-192.png",
