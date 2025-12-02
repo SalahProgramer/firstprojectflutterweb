@@ -7,7 +7,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
-import 'dart:io' show Platform;
 
 import '../../../../controllers/address_provider.dart';
 import '../../../../controllers/cart_controller.dart';
@@ -293,9 +292,9 @@ class _CheckoutSecondScreenState extends State<CheckoutSecondScreen> {
                         String platform = "";
                         if (kIsWeb) {
                           platform = "Web";
-                        } else if (Platform.isAndroid) {
+                        } else if (defaultTargetPlatform == TargetPlatform.android) {
                           platform = 'Android';
-                        } else if (Platform.isIOS) {
+                        } else if (defaultTargetPlatform == TargetPlatform.iOS) {
                           platform = 'IOS';
                         }
                         await orderControllerSalah.getCheckPendingOrder(

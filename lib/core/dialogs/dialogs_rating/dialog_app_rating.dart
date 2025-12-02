@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
@@ -15,6 +15,7 @@ import '../../utilities/style/colors.dart';
 import '../../utilities/style/text_style.dart';
 import '../../widgets/custom_button.dart';
 import '../../services/analytics/analytics_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> dialogRatingApp({required RateMyApp rateMyApp}) {
   return showGeneralDialog(
@@ -153,10 +154,10 @@ Future<void> dialogRatingApp({required RateMyApp rateMyApp}) {
 
                                       // ✅ Check the platform and open the correct store
                                       Uri storeUri;
-                                      if (Platform.isAndroid) {
+                                      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
                                         storeUri = Uri.parse(
                                             "https://play.google.com/store/apps/details?id=$androidAppId");
-                                      } else if (Platform.isIOS) {
+                                      } else if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
                                         storeUri = Uri.parse(
                                             "https://apps.apple.com/app/id$iosAppId");
                                       } else {

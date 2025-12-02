@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../../core/utilities/global/app_global.dart';
@@ -176,7 +176,7 @@ class _HomePageDepartmentState extends State<HomePageDepartment> {
                               keyboardDismissBehavior:
                                   ScrollViewKeyboardDismissBehavior.onDrag,
                               itemCount: 12,
-                              physics: Platform.isIOS
+                              physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                                   ? ClampingScrollPhysics()
                                   : AlwaysScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
@@ -208,7 +208,7 @@ class _HomePageDepartmentState extends State<HomePageDepartment> {
                                 itemCount: (departmentsController.haveMoreData)
                                     ? departmentsController.itemsData.length + 1
                                     : departmentsController.itemsData.length,
-                                physics: Platform.isIOS
+                                physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                                     ? ClampingScrollPhysics()
                                     : AlwaysScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,

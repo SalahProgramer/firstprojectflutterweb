@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import '../../../controllers/APIS/api_product_item.dart';
 import '../../../controllers/cart_controller.dart';
@@ -215,7 +215,7 @@ class _SubItemsState extends State<SubItems> {
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
                     itemCount: 12,
-                    physics: Platform.isIOS
+                    physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                         ? ClampingScrollPhysics()
                         : AlwaysScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
@@ -238,7 +238,7 @@ class _SubItemsState extends State<SubItems> {
                     itemCount: (subMainCategoriesController.haveMoreData)
                         ? subMainCategoriesController.subCategories.length + 1
                         : subMainCategoriesController.subCategories.length,
-                    physics: Platform.isIOS
+                    physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                         ? ClampingScrollPhysics()
                         : AlwaysScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,

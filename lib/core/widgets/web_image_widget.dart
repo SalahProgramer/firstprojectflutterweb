@@ -42,7 +42,8 @@ class _WebImageWidgetState extends State<WebImageWidget> {
       ..src = widget.imageUrl
       ..style.width = '100%'
       ..style.height = '100%'
-      ..style.objectFit = _getObjectFit(widget.boxFit ?? BoxFit.fill);
+      ..style.objectFit = _getObjectFit(widget.boxFit ?? BoxFit.fill)
+      ..style.pointerEvents = 'none'; // Allow clicks to pass through
 
     img.onLoad.listen((_) {
       if (mounted) {
@@ -68,7 +69,8 @@ class _WebImageWidgetState extends State<WebImageWidget> {
         final container = html.DivElement()
           ..style.width = '100%'
           ..style.height = '100%'
-          ..style.overflow = 'hidden';
+          ..style.overflow = 'hidden'
+          ..style.pointerEvents = 'none'; // Allow clicks to pass through
         
         if (widget.borderRadius != null) {
           final radius = widget.borderRadius!;
@@ -122,7 +124,10 @@ class _WebImageWidgetState extends State<WebImageWidget> {
     return SizedBox(
       width: double.maxFinite,
       height: widget.height ?? 300.w,
-      child: HtmlElementView(viewType: _viewId),
+      child: HtmlElementView(
+        key: ValueKey(_viewId),
+        viewType: _viewId,
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../services/analytics/analytics_service.dart';
@@ -117,7 +117,7 @@ class _WidgetEachDepartmentState extends State<WidgetEachDepartment> {
                           child: GridView.builder(
                             scrollDirection: Axis.vertical,
                             clipBehavior: Clip.none,
-                            physics: Platform.isIOS
+                            physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                                 ? ClampingScrollPhysics()
                                 : AlwaysScrollableScrollPhysics(),
                             itemCount: widget.listStyle2.length,

@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -120,7 +120,7 @@ Future<void> showItemSearch(
                         keyboardDismissBehavior:
                             ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: 12,
-                        physics: Platform.isIOS
+                        physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                             ? ClampingScrollPhysics()
                             : AlwaysScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
@@ -142,7 +142,7 @@ Future<void> showItemSearch(
                         itemCount: (searchItemController.haveMoreData)
                             ? searchItemController.subCategories.length + 1
                             : searchItemController.subCategories.length,
-                        physics: Platform.isIOS
+                        physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                             ? ClampingScrollPhysics()
                             : AlwaysScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
@@ -511,7 +511,7 @@ Future<void> showItemFilter(
                         keyboardDismissBehavior:
                             ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: 12,
-                        physics: Platform.isIOS
+                        physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                             ? ClampingScrollPhysics()
                             : AlwaysScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
@@ -533,7 +533,7 @@ Future<void> showItemFilter(
                         itemCount: (searchItemController.haveMoreData)
                             ? searchItemController.subCategories.length + 1
                             : searchItemController.subCategories.length,
-                        physics: Platform.isIOS
+                        physics: (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                             ? ClampingScrollPhysics()
                             : AlwaysScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
