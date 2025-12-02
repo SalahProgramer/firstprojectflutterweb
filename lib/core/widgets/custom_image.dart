@@ -39,21 +39,25 @@ class CustomImageSponsored extends StatelessWidget {
     final deviceHeight = MediaQuery.sizeOf(context).height;
     // final deviceWidth = MediaQuery.sizeOf(context).width;
 
-    return Center(
-      child: InkWell(
-        onTap: (hasInk == true) ? () {} : null,
-        child: ClipRRect(
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(borderCircle ?? 90.r),
-          child: Container(
-            margin: EdgeInsets.zero,
-            padding: padding ?? EdgeInsets.only(bottom: 0.h),
-            child: kIsWeb
-                ? _buildWebImage()
-                : _buildMobileImage(deviceHeight),
-          ),
-        ),
+    final imageWidget = ClipRRect(
+      borderRadius:
+          borderRadius ?? BorderRadius.circular(borderCircle ?? 90.r),
+      child: Container(
+        margin: EdgeInsets.zero,
+        padding: padding ?? EdgeInsets.only(bottom: 0.h),
+        child: kIsWeb
+            ? _buildWebImage()
+            : _buildMobileImage(deviceHeight),
       ),
+    );
+
+    return Center(
+      child: hasInk
+          ? InkWell(
+              onTap: () {},
+              child: imageWidget,
+            )
+          : imageWidget,
     );
   }
 

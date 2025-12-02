@@ -50,7 +50,7 @@ flutter clean
 flutter pub get
 
 # 2. أعد بناء الموقع
-flutter build web --release
+flutter build web --release --no-tree-shake-icons
 
 # 3. ارفع على Vercel
 vercel --prod

@@ -298,8 +298,10 @@ flutter pub get
 
 2. **أعد بناء الموقع:**
 ```bash
-flutter build web --release
+flutter build web --release --no-tree-shake-icons
 ```
+
+**ملاحظة:** نستخدم `--no-tree-shake-icons` لتجنب مشاكل الأيقونات المفقودة.
 
 3. **ارفع على Vercel:**
 ```bash

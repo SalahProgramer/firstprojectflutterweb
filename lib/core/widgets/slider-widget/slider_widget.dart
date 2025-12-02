@@ -59,11 +59,7 @@ class _SlideImageState extends State<SlideImage> {
       children: widget.sliderImage
           .map((e) => Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.w),
-                child: InkWell(
-                  overlayColor: WidgetStateColor.transparent,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: () async {
                     await analyticsService.logViewContent(
                       contentId: e.id?.toString() ?? "",
@@ -381,6 +377,7 @@ class _SlideImageState extends State<SlideImage> {
                       );
                     }
                   },
+                  behavior: HitTestBehavior.opaque,
                   child: Container(
                     margin: EdgeInsets.only(bottom: 20.h, top: 2.h),
                     decoration: BoxDecoration(
