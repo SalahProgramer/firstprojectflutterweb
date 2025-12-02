@@ -104,10 +104,9 @@
   
   <!-- تحسينات للـ WebView -->
   <script>
-    // منع أخطاء WebGL في WebView
+    // تهيئة Flutter بأفضل renderer متوفر
     window.flutterConfiguration = {
-      canvasKitBaseUrl: "https://unpkg.com/canvaskit-wasm@0.38.0/bin/",
-      renderer: "canvaskit"
+      canvasKitBaseUrl: "https://unpkg.com/canvaskit-wasm@0.38.0/bin/"
     };
     
     // تحسين الأداء في WebView
