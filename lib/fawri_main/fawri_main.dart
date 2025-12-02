@@ -1,11 +1,9 @@
 
-import 'package:fawri_app_refactor/fawri_main/splash.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../Cubits/cubit_connection/internet_cubit.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/checks_controller.dart';
@@ -15,17 +13,15 @@ import '../controllers/product_item_controller.dart';
 import '../controllers/showcase_controller.dart';
 import '../core/constants/constant_data/categories_data_service.dart';
 import '../core/dialogs/dialog_connected_wifi/dialog_connect_wifi.dart';
+import '../core/utilities/routes.dart';
 import '../core/services/database/hive_data/hive_collection.dart';
 import '../core/services/locator.dart';
 import '../core/services/notifications/notification_service.dart';
 import '../core/services/sentry/sentry_service.dart';
 import '../core/utilities/global/app_global.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../games/audio_helper.dart';
 import '../games/games_cubit.dart';
-import '../views/pages/pages.dart';
-import '../views/pages/privacy_policy/privacy_policy.dart';
 
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -270,8 +266,16 @@ class _FawriState extends State<Fawri> {
                 ],
                 scaffoldMessengerKey: rootScaffoldMessengerKey,
                 debugShowCheckedModeBanner: false,
-                routes: {
-                  "/pages": (context) => Pages(),
+                initialRoute: AppRoutes.splash,
+                onGenerateRoute: (settings) {
+                  final builder = listRoute[settings.name];
+                  if (builder != null) {
+                    return MaterialPageRoute(
+                      builder: (context) => builder(context, settings.arguments),
+                      settings: settings,
+                    );
+                  }
+                  return null;
                 },
                 title: 'Fawri',
                 localizationsDelegates: const [
@@ -326,20 +330,8 @@ class _FawriState extends State<Fawri> {
                   );
                 },
                 home: child,
-                onGenerateRoute: (settings) {
-                  if (settings.name == '/product_details') {
-                    return MaterialPageRoute(
-                      builder: (context) => Privacy(),
-                    );
-                  }
-                  return null;
-                },
               );
             },
-            child: ShowCaseWidget(
-              builder: (context) =>
-                  Splash(),
-            ),
           );
         },
       ),
