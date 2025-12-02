@@ -11,7 +11,7 @@ import '../core/firebase/user/user_model.dart';
 import '../core/services/database/address/local_storage.dart';
 import '../core/services/sentry/sentry_service.dart';
 import '../core/utilities/global/app_global.dart';
-import '../views/pages/pages.dart';
+import '../core/utilities/routes.dart';
 import 'custom_page_controller.dart';
 
 class UserController extends ChangeNotifier {
@@ -118,7 +118,7 @@ class UserController extends ChangeNotifier {
       await prefs.setBool('login', true);
       await customPageController.changeIndexPage(0);
       await customPageController.changeIndexCategoryPage(1);
-      NavigatorApp.navigateToRemoveUntil(Pages());
+      NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
     }).catchError((error, stack) async {
       await SentryService.captureError(exception: error, stackTrace: stack);
       Fluttertoast.showToast(msg: "حدث خطأ ما , الرجاء المحاوله فيما بعد");
@@ -231,7 +231,7 @@ class UserController extends ChangeNotifier {
       await customPageController.changeIndexPage(0);
       await customPageController.changeIndexCategoryPage(1);
       notifyListeners();
-      NavigatorApp.navigateToRemoveUntil(Pages());
+      NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
       await Future.delayed(Duration(seconds: 2));
       changeLoading();
     }).catchError((error, stack) async {

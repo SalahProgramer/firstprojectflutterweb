@@ -1,4 +1,3 @@
-import 'package:fawri_app_refactor/views/pages/home/main_screen/product_item_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,6 +8,7 @@ import '../../../../controllers/favourite_controller.dart';
 import '../../../../controllers/page_main_screen_controller.dart';
 import '../../../../controllers/product_item_controller.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/widgets/custom_shimmer.dart';
 import '../../../../core/widgets/snackBarWidgets/snack_bar_style.dart';
@@ -140,11 +140,14 @@ class _MoreDataHomeState extends State<MoreDataHome> {
                   await productItemController.clearItemsData();
                   await apiProductItemController.cancelRequests();
 
-                  NavigatorApp.push(ProductItemView(
-                    item: pageMainScreenController.itemsMoreData[index],
-                    isFeature: false,
-                    sizes: '',
-                  ));
+                  NavigatorApp.pushName(
+                    AppRoutes.productItemView,
+                    arguments: {
+                      'item': pageMainScreenController.itemsMoreData[index],
+                      'isFeature': false,
+                      'sizes': '',
+                    },
+                  );
                 },
                 child: UiSpecificItemMoreData(
                   favourite: favourite,

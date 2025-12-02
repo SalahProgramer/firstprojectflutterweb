@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 import '../../../../controllers/fetch_controller.dart';
 import '../../../../controllers/sub_main_categories_conrtroller.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_shimmer.dart';
 import '../../../../core/widgets/widgets_main_screen/show_big_small_categories.dart';
 import '../../../../core/widgets/widgets_main_screen/titles.dart';
 import '../../../../models/sections/style_model.dart';
 import '../../../../models/products_view_config.dart';
-import '../home_screen/home_screen.dart';
 import '../../../../controllers/page_main_screen_controller.dart';
 
 
@@ -120,17 +120,20 @@ class SectionItems extends StatelessWidget {
               onTap: () async {
                 await subMainCategoriesController.clear();
 
-                NavigatorApp.push(HomeScreen(
-                  i: index,
-                  scrollController:
-                      subMainCategoriesController.scrollSectionsItems,
-                  type:
-                      pageMainScreenController.sections[index].name.toString(),
-                  title: "",
-                  url: "",
-                  hasAppBar: true,
-                  bannerTitle: '',
-                ));
+                NavigatorApp.pushName(
+                  AppRoutes.homeScreen,
+                  arguments: {
+                    'i': index,
+                    'scrollController':
+                        subMainCategoriesController.scrollSectionsItems,
+                    'type':
+                        pageMainScreenController.sections[index].name.toString(),
+                    'title': "",
+                    'url': "",
+                    'hasAppBar': true,
+                    'bannerTitle': '',
+                  },
+                );
               },
               turn: 1,
             ),
@@ -155,18 +158,21 @@ class SectionItems extends StatelessWidget {
             onTap: () async {
               await subMainCategoriesController.clear();
 
-              NavigatorApp.push(HomeScreen(
-                bannerTitle: "",
-                endDate: "",
-                hasAppBar: true,
-                type: "normal",
-                productsKinds: false,
-                title: pageMainScreenController.sections[index].name,
-                url: pageMainScreenController.sections[index].contentUrl,
-                scrollController:
-                    subMainCategoriesController.scrollSlidersItems,
-                slider: true,
-              ));
+              NavigatorApp.pushName(
+                AppRoutes.homeScreen,
+                arguments: {
+                  'bannerTitle': "",
+                  'endDate': "",
+                  'hasAppBar': true,
+                  'type': "normal",
+                  'productsKinds': false,
+                  'title': pageMainScreenController.sections[index].name,
+                  'url': pageMainScreenController.sections[index].contentUrl,
+                  'scrollController':
+                      subMainCategoriesController.scrollSlidersItems,
+                  'slider': true,
+                },
+              );
             },
             child: Container(
               margin: EdgeInsets.only(bottom: 20.h, top: 2.h),

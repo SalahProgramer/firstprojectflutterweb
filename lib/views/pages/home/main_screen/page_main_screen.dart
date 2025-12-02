@@ -5,6 +5,7 @@ import '../../../../controllers/fetch_controller.dart';
 import '../../../../controllers/points_controller.dart';
 import '../../../../core/dialogs/dialogs_rating/dialog_rating.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/print_looger.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/widgets/widgets_main_screen/button_spin_order.dart';
@@ -27,7 +28,6 @@ import '../../departments/basic_departments.dart';
 import 'get_sliders.dart';
 import 'more_data_home.dart';
 import 'products_list.dart';
-import 'survey_form_page.dart';
 
 class PageMainScreen extends StatefulWidget {
   const PageMainScreen({super.key});
@@ -115,7 +115,12 @@ class _PageMainScreenState extends State<PageMainScreen>
       child: GestureDetector(
         onTap: () async {
           if (!mounted) return;
-          await NavigatorApp.push(SurveyFormPage(url: surveyFormUrl));
+          await NavigatorApp.pushName(
+            AppRoutes.surveyFormPage,
+            arguments: {
+              'url': surveyFormUrl,
+            },
+          );
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.r),
@@ -216,16 +221,27 @@ class _PageMainScreenState extends State<PageMainScreen>
     required String phone,
   }) async {
     try {
-      await Future.wait<void>([
-        pointsControllerClass.getPointsFromAPI(phone: phone).catchError((e) {
-          printLog(e.toString());
-          throw e;
-        }),
+      // Create list of futures to wait for
+      final List<Future<void>> futures = [
         pageMainScreenController.returnFirstImageEachMain().catchError((e) {
           printLog(e.toString());
           throw e;
         }),
-      ]);
+      ];
+
+      // Only fetch points if we have a valid phone number
+      if (phone.isNotEmpty) {
+        futures.add(
+          pointsControllerClass.getPointsFromAPI(phone: phone).catchError((e) {
+            printLog("Error fetching points: ${e.toString()}");
+            throw e;
+          }),
+        );
+      } else {
+        printLog("Skipping getPointsFromAPI - no phone number available");
+      }
+
+      await Future.wait<void>(futures);
     } catch (e) {
       printLog(e.toString());
     }

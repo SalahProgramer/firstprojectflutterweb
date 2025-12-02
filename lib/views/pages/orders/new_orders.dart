@@ -7,6 +7,7 @@ import 'package:rate_my_app/rate_my_app.dart';
 import '../../../controllers/custom_page_controller.dart';
 import '../../../controllers/order_controller.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import '../../../core/utilities/style/text_style.dart';
 import '../../../core/widgets/app_bar_widgets/app_bar_custom.dart';
@@ -14,7 +15,6 @@ import '../../../core/widgets/lottie_widget.dart';
 import '../../../core/widgets/widget_orders/widget_button_order.dart';
 import '../../../core/widgets/widget_orders/widget_specidic_order.dart';
 import '../../../models/order/order_detail_model.dart';
-import '../pages.dart';
 
 class OrdersPages extends StatefulWidget {
   final String phone;
@@ -113,7 +113,7 @@ class _OrdersPagesState extends State<OrdersPages> {
           if (Navigator.of(context).canPop() == true) {
             NavigatorApp.pop();
           } else {
-            NavigatorApp.pushReplacment(Pages());
+            NavigatorApp.pushReplacment(AppRoutes.pages);
 
             await customPageController.changeIndexPage(0);
             await customPageController.changeIndexCategoryPage(1);

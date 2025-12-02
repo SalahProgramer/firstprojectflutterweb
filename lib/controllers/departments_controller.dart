@@ -4,15 +4,8 @@ import '../core/constants/constant_data/constant_data_convert.dart';
 import '../core/network/connection_network.dart';
 import '../core/services/database/hive_data/data_sizes.dart';
 import '../core/utilities/global/app_global.dart';
+import '../core/utilities/routes.dart';
 import '../core/utilities/print_looger.dart';
-import '../views/pages/departments/departs/kids_types/kids_all.dart';
-import '../views/pages/departments/departs/men.dart';
-import '../views/pages/departments/departs/perfume.dart';
-import '../views/pages/departments/departs/shoes_types/shoes.dart';
-import '../views/pages/departments/departs/underware.dart';
-import '../views/pages/departments/departs/women.dart';
-import '../views/pages/departments/departs/women_plus.dart';
-import '../views/pages/departments/page_dapartment.dart';
 import 'APIS/api_departments_controller.dart';
 import 'favourite_controller.dart';
 import '../models/constants/constant_model.dart';
@@ -698,21 +691,33 @@ class DepartmentsController extends ChangeNotifier {
 
   Future<void> tapSelectCategory({required CategoryModel categoryModel}) async {
     if (categoryModel.id == 1.toString()) {
-      NavigatorApp.push(Women(
-        category: categoryModel,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.women,
+        arguments: {
+          'category': categoryModel,
+        },
+      );
     } else if (categoryModel.id == 2.toString()) {
-      NavigatorApp.push(Men(
-        category: categoryModel,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.men,
+        arguments: {
+          'category': categoryModel,
+        },
+      );
     } else if (categoryModel.id == 3.toString()) {
-      NavigatorApp.push(KidsAll(
-        category: categoryModel,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.kidsAll,
+        arguments: {
+          'category': categoryModel,
+        },
+      );
     } else if (categoryModel.id == 4.toString()) {
-      NavigatorApp.push(WomenPlus(
-        category: categoryModel,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.womenPlus,
+        arguments: {
+          'category': categoryModel,
+        },
+      );
     } else if (categoryModel.id == 5.toString()) {
       await clearMulti();
 
@@ -721,21 +726,27 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(bags, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 6.toString()) {
-      NavigatorApp.push(Shoes(
-        category: categoryModel,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.shoes,
+        arguments: {
+          'category': categoryModel,
+        },
+      );
     }
     //------------------------------------------------------- (9,10,11,15- 32 )   -----------------------------------------
     else if (categoryModel.id == 9.toString()) {
-      NavigatorApp.push(Underware());
+      NavigatorApp.pushName(AppRoutes.underware);
     } else if (categoryModel.id == 10.toString()) {
       await clearMulti();
 
@@ -744,15 +755,18 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(womenAndBaby, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        showIconSizes: false,
-        category: categoryModel,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'showIconSizes': false,
+          'category': categoryModel,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 11.toString()) {
-      NavigatorApp.push(PerfumeHome());
+      NavigatorApp.pushName(AppRoutes.perfume);
     } else if (categoryModel.id == 15.toString()) {
       await clearMulti();
 
@@ -761,13 +775,16 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(home, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 16.toString()) {
       await clearMulti();
 
@@ -776,13 +793,16 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(apparel, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 17.toString()) {
       await clearMulti();
 
@@ -791,65 +811,80 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(beauty, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        sizes: '',
-        showIconSizes: false,
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'sizes': '',
+          'showIconSizes': false,
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 18.toString()) {
       await clearMulti();
 
       await setSubCategoryDepartments([], false);
 
       await setSubCategorySpecific(categoryModel);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 19.toString()) {
       await clearMulti();
 
       await setSubCategoryDepartments([], false);
 
       await setSubCategorySpecific(categoryModel);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        showIconSizes: false,
-        category: categoryModel,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'showIconSizes': false,
+          'category': categoryModel,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 20.toString()) {
       await clearMulti();
 
       await setSubCategoryDepartments([], false);
 
       await setSubCategorySpecific(categoryModel);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        showIconSizes: false,
-        category: categoryModel,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'showIconSizes': false,
+          'category': categoryModel,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 21.toString()) {
       await clearMulti();
 
       await setSubCategoryDepartments([], false);
 
       await setSubCategorySpecific(categoryModel);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 22.toString()) {
       await clearMulti();
 
@@ -858,13 +893,16 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(electronics, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        showIconSizes: false,
-        category: categoryModel,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'showIconSizes': false,
+          'category': categoryModel,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     } else if (categoryModel.id == 23.toString()) {
       await clearMulti();
 
@@ -873,13 +911,16 @@ class DepartmentsController extends ChangeNotifier {
       await setSubCategoryDepartments(sports, false);
 
       await setSubCategorySpecific(category[0]);
-      NavigatorApp.push(PageDapartment(
-        title: categoryModel.name,
-        category: categoryModel,
-        showIconSizes: false,
-        sizes: '',
-        scrollController: scrollMultiItems,
-      ));
+      NavigatorApp.pushName(
+        AppRoutes.pageDepartment,
+        arguments: {
+          'title': categoryModel.name,
+          'category': categoryModel,
+          'showIconSizes': false,
+          'sizes': '',
+          'scrollController': scrollMultiItems,
+        },
+      );
     }
   }
 }

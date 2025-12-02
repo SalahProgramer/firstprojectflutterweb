@@ -7,7 +7,7 @@ import '../../../../core/services/database/hive_data/data_sizes.dart';
 import '../../../../core/widgets/departments_home_widgets/widget_each_department.dart';
 import '../../../../models/constants/constant_model.dart';
 import '../../../../core/utilities/global/app_global.dart';
-import '../page_dapartment.dart';
+import '../../../../core/utilities/routes.dart';
 
 class Men extends StatefulWidget {
   final CategoryModel category;
@@ -48,13 +48,16 @@ class _MenState extends State<Men> {
             .where((entry) => entry.value) // Filter only `true` values
             .map((entry) => entry.key) // Get the keys (clothing names)
             .join(","); // Join into a single string
-        NavigatorApp.push(PageDapartment(
-          title: widget.category.name,
-          category: category[0],
-          showIconSizes: true,
-          sizes: sizes ?? "",
-          scrollController: departmentsController.scrollMultiItems,
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.pageDepartment,
+          arguments: {
+            'title': widget.category.name,
+            'category': category[0],
+            'showIconSizes': true,
+            'sizes': sizes ?? "",
+            'scrollController': departmentsController.scrollMultiItems,
+          },
+        );
       },
       onPressedSkip: () async {
         await departmentsController.clearAll();
@@ -65,13 +68,16 @@ class _MenState extends State<Men> {
             .setSubCategorySpecificFirstMulti(category[0]);
         await customPageController.changeIndexCategoryPage(1);
 
-        NavigatorApp.push(PageDapartment(
-          title: widget.category.name,
-          category: category[0],
-          showIconSizes: true,
-          sizes: "",
-          scrollController: departmentsController.scrollMultiItems,
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.pageDepartment,
+          arguments: {
+            'title': widget.category.name,
+            'category': category[0],
+            'showIconSizes': true,
+            'sizes': "",
+            'scrollController': departmentsController.scrollMultiItems,
+          },
+        );
       },
     );
   }

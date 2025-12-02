@@ -4,8 +4,7 @@ import '../core/services/dynamic_link/dynamic_link_service.dart';
 import '../core/services/firebase/remote_config_firebase/remote_config_firebase.dart';
 import '../core/services/notifications/notification_service.dart';
 import '../core/utilities/global/app_global.dart';
-import '../views/login/login_screen.dart';
-import '../views/pages/pages.dart';
+import '../core/utilities/routes.dart';
 
 class ChecksController extends ChangeNotifier {
   bool firstScreen = true;
@@ -44,9 +43,9 @@ class ChecksController extends ChangeNotifier {
 
   Future<void> viewPage() async {
     if (firstScreen) {
-      NavigatorApp.navigateToRemoveUntil(LoginScreen());
+      NavigatorApp.navigateToRemoveUntil(AppRoutes.loginScreen);
     } else {
-      NavigatorApp.navigateToRemoveUntil(Pages());
+      NavigatorApp.navigateToRemoveUntil(AppRoutes.pages);
 
       await NotificationService.handleInitialActionIfAny();
 

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,6 @@ import '../../../core/widgets/snackBarWidgets/snack_bar_style.dart';
 import '../../../core/widgets/snackBarWidgets/snackbar_widget.dart';
 import '../../../core/widgets/widget_sub_main/ui_specific_sub_main.dart';
 import '../../../models/constants/constant_model.dart';
-import '../home/main_screen/product_item_view.dart';
 import '../searchandfilterandgame/widget_search_filter.dart';
 
 class HomePageDepartment extends StatefulWidget {
@@ -264,12 +264,15 @@ class _HomePageDepartmentState extends State<HomePageDepartment> {
                                             .clearItemsData();
                                         await apiProductItemController
                                             .cancelRequests();
-                                        NavigatorApp.push(ProductItemView(
-                                          item: departmentsController
-                                              .itemsData[index],
-                                          isFeature: false,
-                                          sizes: widget.sizes,
-                                        ));
+                                        NavigatorApp.pushName(
+                                          AppRoutes.productItemView,
+                                          arguments: {
+                                            'item': departmentsController
+                                                .itemsData[index],
+                                            'isFeature': false,
+                                            'sizes': widget.sizes,
+                                          },
+                                        );
                                       },
                                       child: UiSpecificSubMain(
                                         favourite: favourite,

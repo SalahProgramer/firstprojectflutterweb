@@ -33,8 +33,6 @@ class ProductItemView extends StatefulWidget {
 }
 
 class _ProductItemViewState extends State<ProductItemView> {
-  late ProductItemController productItemController;
-  late ApiProductItemController apiProductItemController;
   Timer? timer; // Declare a Timer variable
   final CarouselSliderController carouselController =
       CarouselSliderController();
@@ -44,10 +42,11 @@ class _ProductItemViewState extends State<ProductItemView> {
   void initState() {
     super.initState();
 
-    productItemController = context.read<ProductItemController>();
-    apiProductItemController = context.read<ApiProductItemController>();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
+        // التأكد من أن الـ context جاهز قبل استخدام Provider
+        if (!mounted) return;
+        
         ProductItemController productItemController =
             context.read<ProductItemController>();
 
@@ -55,6 +54,7 @@ class _ProductItemViewState extends State<ProductItemView> {
             context.read<ApiProductItemController>();
         PageMainScreenController pageMainScreenController =
             context.read<PageMainScreenController>();
+        
         // start save the analytics
         analyticsService.logViewContent(
           contentId: widget.item.id?.toString() ?? "",
@@ -81,6 +81,8 @@ class _ProductItemViewState extends State<ProductItemView> {
         }
 
         timer = Timer(Duration(seconds: 5), () async {
+          if (!mounted) return;
+          
           final prefs = await SharedPreferences.getInstance();
           bool showPopUpShoes = prefs.getBool('show_pop_up_shoes') ?? true;
 
@@ -95,8 +97,12 @@ class _ProductItemViewState extends State<ProductItemView> {
         });
       },
     );
+  }
 
-    super.initState();
+  @override
+  void dispose() {
+    timer?.cancel(); // تنظيف الـ Timer
+    super.dispose();
   }
 
   @override

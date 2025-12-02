@@ -1,6 +1,7 @@
 import 'package:fawri_app_refactor/views/pages/home/main_screen/products_list.dart';
 
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/style/colors.dart';
 import '../../../../core/utilities/style/text_style.dart';
 import '../../../../core/widgets/custom_text.dart';
@@ -13,7 +14,6 @@ import 'package:lottie/lottie.dart';
 import 'package:neon_circular_timer/neon_circular_timer.dart';
 import 'package:provider/provider.dart';
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
-import '../home_screen/home_screen.dart';
 import '../../../../controllers/page_main_screen_controller.dart';
 import '../../../../controllers/sub_main_categories_conrtroller.dart';
 import 'build_timer.dart';
@@ -152,20 +152,23 @@ class _FlashSalesMainState extends State<FlashSalesMain> {
                 // await customPageController.changeIndexPage(0);
                 // await customPageController.changeIndexCategoryPage(1);
 
-                NavigatorApp.push(HomeScreen(
-                  bannerTitle:
-                      "ينتهي خلال ${pageMainScreenController.flash?.countdownHours.toString() ?? ""}",
-                  endDate: pageMainScreenController.flash!.endDate.toString(),
-                  type: "flash_sales",
-                  url: pageMainScreenController.flash!.userLimit.toString(),
-                  title:
-                      "ينتهي خلال ${pageMainScreenController.flash?.countdownHours.toString() ?? ""}",
-                  slider: false,
-                  hasAppBar: true,
-                  productsKinds: true,
-                  scrollController:
-                      subMainCategoriesController.scrollDynamicItems,
-                ));
+                NavigatorApp.pushName(
+                  AppRoutes.homeScreen,
+                  arguments: {
+                    'bannerTitle':
+                        "ينتهي خلال ${pageMainScreenController.flash?.countdownHours.toString() ?? ""}",
+                    'endDate': pageMainScreenController.flash!.endDate.toString(),
+                    'type': "flash_sales",
+                    'url': pageMainScreenController.flash!.userLimit.toString(),
+                    'title':
+                        "ينتهي خلال ${pageMainScreenController.flash?.countdownHours.toString() ?? ""}",
+                    'slider': false,
+                    'hasAppBar': true,
+                    'productsKinds': true,
+                    'scrollController':
+                        subMainCategoriesController.scrollDynamicItems,
+                  },
+                );
               },
             ),
           ],

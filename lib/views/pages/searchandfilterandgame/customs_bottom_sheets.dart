@@ -11,12 +11,12 @@ import '../../../controllers/product_item_controller.dart';
 import '../../../controllers/favourite_controller.dart';
 import '../../../controllers/search_controller.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import '../../../core/utilities/style/text_style.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_shimmer.dart';
 import '../../../core/widgets/widget_sub_main/ui_specific_sub_main.dart';
-import '../home/main_screen/product_item_view.dart';
 
 Future<void> showItemSearch(
     {required ScrollController scrollController, required String sizes}) async {
@@ -190,11 +190,14 @@ Future<void> showItemSearch(
                                       0);
                               await productItemController.clearItemsData();
                               await apiProductItemController.cancelRequests();
-                              NavigatorApp.push(ProductItemView(
-                                item: searchItemController.subCategories[index],
-                                isFeature: false,
-                                sizes: sizes,
-                              ));
+                              NavigatorApp.pushName(
+                                AppRoutes.productItemView,
+                                arguments: {
+                                  'item': searchItemController.subCategories[index],
+                                  'isFeature': false,
+                                  'sizes': sizes,
+                                },
+                              );
                             },
                             child: UiSpecificSubMain(
                               favourite: favourite,
@@ -578,11 +581,14 @@ Future<void> showItemFilter(
                                       0);
                               await productItemController.clearItemsData();
                               await apiProductItemController.cancelRequests();
-                              NavigatorApp.push(ProductItemView(
-                                item: searchItemController.subCategories[index],
-                                isFeature: false,
-                                sizes: sizes,
-                              ));
+                              NavigatorApp.pushName(
+                                AppRoutes.productItemView,
+                                arguments: {
+                                  'item': searchItemController.subCategories[index],
+                                  'isFeature': false,
+                                  'sizes': sizes,
+                                },
+                              );
                             },
                             child: UiSpecificSubMain(
                               favourite: favourite,

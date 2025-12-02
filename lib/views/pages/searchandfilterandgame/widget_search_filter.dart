@@ -11,6 +11,7 @@ import '../../../controllers/showcase_controller.dart';
 import '../../../core/dialogs/dialog_waiting/dialog_waiting.dart';
 import '../../../core/services/analytics/analytics_service.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/print_looger.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/departments_home_widgets/show_sorting.dart';
@@ -18,8 +19,6 @@ import '../../../core/widgets/lottie_widget.dart';
 import '../../../core/widgets/widget_text_field/custom_text_field.dart';
 import '../../../models/constants/constant_model.dart';
 import 'game.dart';
-import 'main_search.dart';
-import 'widget_filter.dart';
 
 class WidgetSearchFilter extends StatefulWidget {
   final bool? haveSort;
@@ -152,9 +151,12 @@ class _WidgetSearchFilterState extends State<WidgetSearchFilter> {
                 // if (searchController.categoriesSearch.isEmpty) {
                 await searchController.getCategories();
                 NavigatorApp.pop();
-                NavigatorApp.push(WidgetFilter(
-                  scrollController: searchController.scrollFilterItems,
-                ));
+                NavigatorApp.pushName(
+                  AppRoutes.widgetFilter,
+                  arguments: {
+                    'scrollController': searchController.scrollFilterItems,
+                  },
+                );
               },
               child: LottieWidget(
                 name: Assets.lottie.filter,
@@ -177,9 +179,12 @@ class _WidgetSearchFilterState extends State<WidgetSearchFilter> {
                 // }
 
                 NavigatorApp.pop();
-                NavigatorApp.pushAnimation(MainSearch(
-                  scrollController: searchController.scrollSearchItems,
-                ));
+                NavigatorApp.pushAnimation(
+                  AppRoutes.mainSearch,
+                  arguments: {
+                    'scrollController': searchController.scrollSearchItems,
+                  },
+                );
               },
               prefixIcon: Padding(
                 padding: EdgeInsets.all(2.w),

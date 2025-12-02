@@ -6,8 +6,8 @@ import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../controllers/page_main_screen_controller.dart';
 import '../../controllers/product_item_controller.dart';
 import '../../core/utilities/global/app_global.dart';
+import '../../core/utilities/routes.dart';
 import '../../core/utilities/style/text_style.dart';
-import 'home/main_screen/product_item_view.dart';
 
 class SplashLink extends StatefulWidget {
   final String id;
@@ -31,10 +31,13 @@ class _SplashState extends State<SplashLink> {
       await productItemController.clearItemsData();
       await productItemController.getSpecificProduct(widget.id);
 
-      NavigatorApp.pushReplacment(ProductItemView(
-        item: productItemController.specificItemData!,
-        sizes: "",
-      ));
+      NavigatorApp.pushReplacment(
+        AppRoutes.productItemView,
+        arguments: {
+          'item': productItemController.specificItemData!,
+          'sizes': "",
+        },
+      );
     });
 
     super.initState();

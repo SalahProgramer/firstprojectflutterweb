@@ -1,6 +1,7 @@
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
 import '../../../../core/services/analytics/analytics_service.dart';
 import '../../../../core/utilities/global/app_global.dart';
+import '../../../../core/utilities/routes.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,6 @@ import '../../../../core/utilities/print_looger.dart';
 import '../../../../core/widgets/departments_home_widgets/button_types.dart';
 import '../../../../core/widgets/departments_home_widgets/widget_each_department.dart';
 import '../../../../models/constants/constant_model.dart';
-import '../page_dapartment.dart';
 
 
 class PerfumeHome extends StatefulWidget {
@@ -99,13 +99,16 @@ class _PerfumeHomeState extends State<PerfumeHome> {
 
             await departmentsController.setSubCategorySpecific(category[0]);
 
-            NavigatorApp.push(PageDapartment(
-              showIconSizes: false,
-              title: "عطور",
-              sizes: '',
-              scrollController: departmentsController.scrollPerfumeItems,
-              category: departmentsController.selectSubCategorySpecific,
-            ));
+            NavigatorApp.pushName(
+              AppRoutes.pageDepartment,
+              arguments: {
+                'showIconSizes': false,
+                'title': "عطور",
+                'sizes': '',
+                'scrollController': departmentsController.scrollPerfumeItems,
+                'category': departmentsController.selectSubCategorySpecific,
+              },
+            );
           },
         ),
       ],
@@ -134,13 +137,16 @@ class _PerfumeHomeState extends State<PerfumeHome> {
         }
         printLog(
             "sub :   ${departmentsController.selectSubCategorySpecific.subCategory}");
-        NavigatorApp.push(PageDapartment(
-          title: "عطور",
-          showIconSizes: false,
-          sizes: '',
-          scrollController: departmentsController.scrollPerfumeItems,
-          category: departmentsController.selectSubCategorySpecific,
-        ));
+        NavigatorApp.pushName(
+          AppRoutes.pageDepartment,
+          arguments: {
+            'title': "عطور",
+            'showIconSizes': false,
+            'sizes': '',
+            'scrollController': departmentsController.scrollPerfumeItems,
+            'category': departmentsController.selectSubCategorySpecific,
+          },
+        );
       },
     );
   }

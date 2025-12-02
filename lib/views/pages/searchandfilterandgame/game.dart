@@ -6,9 +6,9 @@ import '../../../controllers/game_controller.dart';
 import '../../../controllers/showcase_controller.dart';
 import '../../../core/dialogs/dialog_waiting/dialog_waiting.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/print_looger.dart';
 import '../../../games/games_cubit.dart';
-import '../../../games/widget_game.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomGameWidget extends StatefulWidget {
@@ -93,7 +93,12 @@ WidgetsBinding.instance.addPostFrameCallback((_) {
 
                   await gameController.set(state.currentPlayingState);
                   NavigatorApp.pop();
-                  NavigatorApp.push(WidgetGame());
+                  NavigatorApp.pushName(
+                    AppRoutes.widgetGame,
+                    arguments: {
+                      'haveSort': widget.haveSort,
+                    },
+                  );
                 },
                 child: Padding(
                   padding: EdgeInsets.all(4.w),

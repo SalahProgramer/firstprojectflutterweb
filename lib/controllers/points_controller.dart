@@ -276,6 +276,12 @@ class PointsController extends ChangeNotifier {
 
   Future<void> getPointsFromAPI(
       {required String phone, bool includeHistory = true}) async {
+    // Validate phone number before making API call
+    if (phone.isEmpty) {
+      printLog("Warning: getPointsFromAPI called with empty phone number");
+      return;
+    }
+
     final result = await apiPointsController.getPoints(
         phone: phone, includeHistory: includeHistory);
 

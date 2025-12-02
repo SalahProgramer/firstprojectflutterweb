@@ -9,11 +9,11 @@ import '../../../controllers/search_controller.dart';
 import '../../../core/dialogs/dialog_waiting/dialog_waiting.dart';
 import '../../../core/services/analytics/analytics_service.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/text_style.dart';
 import '../../../core/widgets/lottie_widget.dart';
 import '../../../core/widgets/widget_text_field/can_custom_text_field.dart';
 import '../../../core/widgets/widgets_item_view/button_done.dart';
-import '../home/main_screen/product_item_view.dart';
 
 class SearchIdSku extends StatefulWidget {
   const SearchIdSku({super.key});
@@ -121,10 +121,13 @@ class _SearchIdSkuState extends State<SearchIdSku> {
                     if (productItemController.isTrue == true) {
                       await productItemController.clearItemsData();
                       await apiProductItemController.cancelRequests();
-                      NavigatorApp.push(ProductItemView(
-                        item: productItemController.specificItemData!,
-                        sizes: '',
-                      ));
+                      NavigatorApp.pushName(
+                        AppRoutes.productItemView,
+                        arguments: {
+                          'item': productItemController.specificItemData!,
+                          'sizes': '',
+                        },
+                      );
                     }
                   },
           ),

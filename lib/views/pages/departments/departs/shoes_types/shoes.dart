@@ -1,5 +1,4 @@
 import 'package:fawri_app_refactor/gen/assets.gen.dart';
-import 'package:fawri_app_refactor/views/pages/departments/departs/shoes_types/women_shoes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../controllers/custom_page_controller.dart';
@@ -7,12 +6,10 @@ import '../../../../../controllers/departments_controller.dart';
 import '../../../../../core/constants/constant_data/constant_data_convert.dart';
 import '../../../../../core/services/analytics/analytics_service.dart';
 import '../../../../../core/utilities/global/app_global.dart';
+import '../../../../../core/utilities/routes.dart';
 import '../../../../../core/widgets/departments_home_widgets/button_types.dart';
 import '../../../../../core/widgets/departments_home_widgets/widget_each_department.dart';
 import '../../../../../models/constants/constant_model.dart';
-import '../../page_dapartment.dart';
-import 'kids_shoes.dart';
-import 'men_shoes.dart';
 
 class Shoes extends StatefulWidget {
   final CategoryModel category;
@@ -55,7 +52,7 @@ class _ShoesState extends State<Shoes> {
               },
             );
 
-            NavigatorApp.push(WomenShoes());
+            NavigatorApp.pushName(AppRoutes.womenShoes);
           },
         ),
         ButtonTypes(
@@ -73,7 +70,7 @@ class _ShoesState extends State<Shoes> {
               },
             );
 
-            NavigatorApp.push(MenShoes());
+            NavigatorApp.pushName(AppRoutes.menShoes);
 
             // await departmentsController
             //     .changeLoadingShoes(
@@ -102,7 +99,7 @@ class _ShoesState extends State<Shoes> {
             //     3,
             //     !departmentsController
             //         .isLoadingShoesTypes![3]!);
-            NavigatorApp.push(KidsShoes());
+            NavigatorApp.pushName(AppRoutes.kidsShoes);
           },
         ),
         ButtonTypes(
@@ -128,13 +125,16 @@ class _ShoesState extends State<Shoes> {
             await departmentsController.setSubCategorySpecific(category[0]);
             await customPageController.changeIndexCategoryPage(1);
 
-            NavigatorApp.push(PageDapartment(
-              title: widget.category.name,
-              category: widget.category,
-              showIconSizes: false,
-              sizes: '',
-              scrollController: departmentsController.scrollMultiItems,
-            ));
+            NavigatorApp.pushName(
+              AppRoutes.pageDepartment,
+              arguments: {
+                'title': widget.category.name,
+                'category': widget.category,
+                'showIconSizes': false,
+                'sizes': '',
+                'scrollController': departmentsController.scrollMultiItems,
+              },
+            );
           },
         ),
       ],

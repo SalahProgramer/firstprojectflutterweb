@@ -23,13 +23,10 @@ import '../../../core/services/database/address/local_storage.dart';
 import '../../../core/services/database/sql_database.dart';
 import '../../../core/utilities/print_looger.dart';
 import '../../../core/utilities/global/app_global.dart';
+import '../../../core/utilities/routes.dart';
 import '../../../core/utilities/style/colors.dart';
 import '../../../core/widgets/profile_tile_widgets.dart';
 import '../../login/login_screen.dart';
-import '../account_information/account_information.dart';
-import '../cart/my_cart.dart';
-import '../orders/new_orders.dart';
-import '../points/users_points.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -135,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                     // Clear all databases
                     await _clearAllUserData();
-                    NavigatorApp.push(LoginScreen());
+                    NavigatorApp.pushName(AppRoutes.loginScreen);
 
                     deleteUser();
                   },
@@ -240,7 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           );
                           await cartController.getCartItems();
 
-                          NavigatorApp.push(MyCart());
+                          NavigatorApp.pushName(AppRoutes.myCart);
                         },
                       ),
                       tilesDivider,
@@ -289,10 +286,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                               await SharedPreferences.getInstance();
 
                           String phone = prefs.getString('phone') ?? "";
-                          NavigatorApp.push(OrdersPages(
-                            userId: userId,
-                            phone: phone,
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.ordersPages,
+                            arguments: {
+                              'userId': userId,
+                              'phone': phone,
+                            },
+                          );
                         },
                       ),
                       tilesDivider,
@@ -322,10 +322,13 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                           String phone = prefs.getString('phone') ?? "";
 
-                          NavigatorApp.push(OrdersPages(
-                            userId: userId,
-                            phone: phone,
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.ordersPages,
+                            arguments: {
+                              'userId': userId,
+                              'phone': phone,
+                            },
+                          );
                         },
                       ),
                     ],
@@ -364,14 +367,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                               name;
                           birthdayController.birthdayProfileController.text =
                               birthday;
-                          NavigatorApp.push(AccountInformation(
-                            address: address,
-                            area: area,
-                            city: city,
-                            birthday: birthday,
-                            name: name,
-                            phone: phone,
-                          ));
+                          NavigatorApp.pushName(
+                            AppRoutes.accountInformation,
+                            arguments: {
+                              'address': address,
+                              'area': area,
+                              'city': city,
+                              'birthday': birthday,
+                              'name': name,
+                              'phone': phone,
+                            },
+                          );
                         },
                       ),
                       tilesDivider,
@@ -390,7 +396,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               "time": DateTime.now().toString(),
                             },
                           );
-                          NavigatorApp.push(UsersPointsPage());
+                          NavigatorApp.pushName(AppRoutes.usersPointsPage);
                         },
                       ),
                       tilesDivider,
@@ -492,8 +498,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 await _clearAllUserData();
 
                                                 // Navigate to login
-                                                NavigatorApp.push(
-                                                    LoginScreen());
+                                                NavigatorApp.pushName(AppRoutes.loginScreen);
                                               },
                                               child: Container(
                                                 height: 50,
