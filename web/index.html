@@ -16,11 +16,17 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="A new Flutter project.">
 
+  <!-- تحسينات للـ WebView -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="format-detection" content="telephone=no">
+  
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="firstprojectflutterweb">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
@@ -94,6 +100,36 @@
       document.getElementById("splash-branding")?.remove();
       document.body.style.background = "transparent";
     }
+  </script>
+  
+  <!-- تحسينات للـ WebView -->
+  <script>
+    // منع أخطاء WebGL في WebView
+    window.flutterConfiguration = {
+      canvasKitBaseUrl: "https://unpkg.com/canvaskit-wasm@0.38.0/bin/",
+      renderer: "canvaskit"
+    };
+    
+    // تحسين الأداء في WebView
+    if (navigator.userAgent.includes('wv') || window.flutter_inappwebview) {
+      console.log('Running in WebView');
+      // تعطيل service worker في WebView
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+    }
+    
+    // التعامل مع أخطاء console
+    window.addEventListener('error', function(e) {
+      if (e.message.includes('GL_INVALID')) {
+        e.preventDefault();
+        return false;
+      }
+    });
   </script>
 </head>
 <body>
