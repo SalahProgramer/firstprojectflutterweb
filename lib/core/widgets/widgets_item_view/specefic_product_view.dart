@@ -534,6 +534,7 @@ class _SpecificProductViewState extends State<SpecificProductView> {
                                           clipBehavior: Clip.none,
                                           children: [
                                             SliderImagesView(
+                                              key: ValueKey('${widget.item.id}_${widget.item.videoUrl}_${widget.item.vendorImagesLinks?.length}'),
                                               id: widget.item.id.toString(),
                                               videoUrl: widget.item.videoUrl,
                                               images:
