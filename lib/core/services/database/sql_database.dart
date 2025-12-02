@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -7,6 +8,11 @@ class SqlDb {
   static Database? _database;
 
   Future<Database?> get database async {
+    // Skip database initialization on web
+    if (kIsWeb) {
+      return null;
+    }
+    
     if (_database == null) {
       _database = await initialDb();
       return _database;
@@ -15,7 +21,13 @@ class SqlDb {
     }
   }
 
-  Future<Database> initialDb() async {
+  Future<Database?> initialDb() async {
+    // Skip database initialization on web
+    if (kIsWeb) {
+      printLog("SQLite not supported on web, skipping database initialization");
+      return null;
+    }
+    
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, "fawriv4.7.db");
     Database fawriDb = await openDatabase(path,
@@ -94,16 +106,32 @@ class SqlDb {
   //----------------------------------------------------------------------------------
   //read_data
   Future<List<Map>> readData({required String sql}) async {
+    // Return empty list on web
+    if (kIsWeb) {
+      return [];
+    }
+    
     Database? fawriDb = await database;
-    List<Map> response = await fawriDb!.rawQuery(sql);
+    if (fawriDb == null) {
+      return [];
+    }
+    List<Map> response = await fawriDb.rawQuery(sql);
     return response;
   }
 
   //----------------------------------------------------------------------------------
   //insert_data
   Future<int> insertData({required String sql}) async {
+    // Return 0 (failed) on web
+    if (kIsWeb) {
+      return 0;
+    }
+    
     Database? fawriDb = await database;
-    int response = await fawriDb!.rawInsert(
+    if (fawriDb == null) {
+      return 0;
+    }
+    int response = await fawriDb.rawInsert(
         sql); //return the integer the raw (if 0 mean failed the mission  else 1 is success)
     return response;
   }
@@ -111,8 +139,16 @@ class SqlDb {
   //----------------------------------------------------------------------------------
   //delete_data
   Future<int> deleteData({required String sql}) async {
+    // Return 0 (failed) on web
+    if (kIsWeb) {
+      return 0;
+    }
+    
     Database? fawriDb = await database;
-    int response = await fawriDb!.rawDelete(
+    if (fawriDb == null) {
+      return 0;
+    }
+    int response = await fawriDb.rawDelete(
         sql); //return the integer the raw (if 0 mean failed the mission  else 1 is success)
     return response;
   }
@@ -120,8 +156,16 @@ class SqlDb {
   //----------------------------------------------------------------------------------
   //update_data
   Future<int> updateData({required String sql}) async {
+    // Return 0 (failed) on web
+    if (kIsWeb) {
+      return 0;
+    }
+    
     Database? fawriDb = await database;
-    int response = await fawriDb!.rawUpdate(
+    if (fawriDb == null) {
+      return 0;
+    }
+    int response = await fawriDb.rawUpdate(
         sql); //return the integer the raw   (if 0 mean failed the mission  else 1 is success)
     return response;
   }
