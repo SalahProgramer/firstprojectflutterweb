@@ -1,9 +1,11 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/services/analytics/analytics_service.dart';
 import '../core/services/notifications/notification_service.dart';
+import '../core/services/notifications/web_notification_service.dart';
 import '../core/utilities/print_looger.dart';
 import '../core/widgets/snackBarWidgets/snack_bar_style.dart';
 import '../core/widgets/snackBarWidgets/snackbar_widget.dart';
@@ -44,6 +46,19 @@ class NotificationController extends ChangeNotifier {
       // استرجاع الحالة المحفوظة من SharedPreferences
       await _loadNotificationState();
 
+      // For web platform, use web notification service
+      if (kIsWeb) {
+        bool webAllowed = await WebNotificationService.canSendNotification();
+        if (!webAllowed) {
+          notificationsEnabled = false;
+          await _saveNotificationState();
+        }
+        notifyListeners();
+        printLog("Web notification status: $notificationsEnabled");
+        return;
+      }
+
+      // For mobile platforms, check Awesome Notifications
       // تحقق من إذن النظام
       bool systemAllowed = await AwesomeNotifications().isNotificationAllowed();
 
@@ -88,6 +103,36 @@ class NotificationController extends ChangeNotifier {
   // Enable notifications
   Future<void> enableNotifications(BuildContext context) async {
     try {
+      // For web platform
+      if (kIsWeb) {
+        bool granted = await WebNotificationService.enableNotifications();
+        if (granted) {
+          notificationsEnabled = true;
+          await _saveNotificationState();
+          
+          // Show test notification
+          await WebNotificationService.showNotification(
+            title: 'إشعارات فوري',
+            body: "تم تفعيل الإشعارات بنجاح!",
+          );
+          
+          showSnackBar(
+            title: "تم تفعيل الإشعارات",
+            type: SnackBarType.success,
+          );
+        } else {
+          notificationsEnabled = false;
+          await _saveNotificationState();
+          showSnackBar(
+            title: "تم رفض إذن الإشعارات من المتصفح",
+            type: SnackBarType.error,
+          );
+        }
+        notifyListeners();
+        return;
+      }
+
+      // For mobile platforms
       // طلب إذن النظام إذا لم يكن مفعل
       bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!isAllowed) {
@@ -122,6 +167,17 @@ class NotificationController extends ChangeNotifier {
   // Disable notifications (stop from app side)
   Future<void> disableNotifications(BuildContext context) async {
     try {
+      // For web platform
+      if (kIsWeb) {
+        await WebNotificationService.disableNotifications();
+        notificationsEnabled = false;
+        await _saveNotificationState();
+        showSnackBar(title: "تم إيقاف الإشعارات", type: SnackBarType.success);
+        notifyListeners();
+        return;
+      }
+
+      // For mobile platforms
       // إلغاء كل الإشعارات المجدولة والحالية (Awesome Notifications)
       await AwesomeNotifications().cancelAllSchedules();
       await AwesomeNotifications().cancelAll();

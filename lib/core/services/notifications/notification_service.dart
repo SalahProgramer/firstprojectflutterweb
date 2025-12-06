@@ -1,13 +1,23 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utilities/print_looger.dart';
 import '../../utilities/style/colors.dart';
 import '../sentry/sentry_service.dart';
+import 'web_notification_service.dart';
 
 class NotificationService {
   static String channelKey = "high_important_notification_fawri";
   static Future<void> initializeNotification() async {
+    // For web platform, use Firebase Cloud Messaging
+    if (kIsWeb) {
+      printLog('Initializing web notifications with Firebase Cloud Messaging');
+      await WebNotificationService.initialize();
+      return;
+    }
+
+    // For mobile platforms, use Awesome Notifications
     // تهيئة مكتبة Awesome Notifications
     await AwesomeNotifications().initialize(
         "resource://mipmap/launcher_icon",
@@ -96,6 +106,12 @@ class NotificationService {
   // التحقق من إمكانية إرسال الإشعارات
   static Future<bool> canSendNotification() async {
     try {
+      // For web, use WebNotificationService
+      if (kIsWeb) {
+        return await WebNotificationService.canSendNotification();
+      }
+
+      // For mobile, use Awesome Notifications
       // تحقق من إذن النظام
       bool systemAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!systemAllowed) {
@@ -141,6 +157,20 @@ class NotificationService {
         printLog("الإشعارات معطلة، لن يتم الإرسال");
         return;
       }
+
+      // For web platform, use web notification service
+      if (kIsWeb) {
+        printLog('Showing web notification: $title');
+        await WebNotificationService.showNotification(
+          title: title,
+          body: body,
+          icon: imageProfile ?? bigPicture,
+          data: payload != null ? Map<String, dynamic>.from(payload) : null,
+        );
+        return;
+      }
+
+      // For mobile platforms, use Awesome Notifications
       // شرط للتأكد: إذا الإشعار مجدول، لازم يكون فيه قيمة interval
       assert(!scheduled || (scheduled && interval != null));
 
@@ -218,6 +248,15 @@ class NotificationService {
         printLog("الإشعارات معطلة، لن يتم جدولة تذكير السلة");
         return;
       }
+
+      // Web doesn't support scheduled local notifications yet
+      // You would need to implement this on your backend
+      if (kIsWeb) {
+        printLog("Scheduled notifications not supported on web platform");
+        printLog("Consider implementing backend scheduled notifications using Firebase Cloud Functions");
+        return;
+      }
+
       if (cartItemCount <= 0) {
         await AwesomeNotifications().cancelSchedule(cartReminderNotificationId);
         return;
@@ -284,6 +323,12 @@ class NotificationService {
   // Cold start handler: call this once app is up (e.g., in Fawri init) to process initial notification tap
   static Future<void> handleInitialActionIfAny() async {
     try {
+      // Web platform handles this differently
+      if (kIsWeb) {
+        printLog("Web notification handling is done through service worker");
+        return;
+      }
+
       final ReceivedAction? initialAction =
       await AwesomeNotifications().getInitialNotificationAction(
         removeFromActionEvents: true,
