@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to "favourite videos" collection
+    // Note: Collection name has a space, so we use wildcard pattern with condition
+    match /{collection}/{document=**} {
+      // Allow access to "favourite videos" collection
+      allow read, write: if collection == 'favourite videos';
+      
+      // Existing collections - allow access to maintain current functionality
+      allow read, write: if collection == 'users';
+      allow read, write: if collection == 'selected_sizes';
+      allow read, write: if collection == 'used_copons';
+      allow read, write: if collection == 'orders';
+    }
+  }
+}

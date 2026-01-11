@@ -1,6 +1,21 @@
-# firstprojectflutterweb
+# fawri_app_refactor
 
 A new Flutter project.
+
+
+## **commends**
+cd /d D:\Flutter2025\flutter\examples\Fawri_version4.0
+
+
+java -jar bundletool-all-1.18.1.jar build-apks ^
+--bundle=build/app/outputs/bundle/release/app-release.aab ^
+--output=output.apks ^
+--ks=D:/Flutter2025/flutter/examples/Fawri_version4.0/key_app1.jks ^
+--ks-key-alias=SH ^
+--ks-pass=pass: ^
+--key-pass=pass: ^
+--mode=universal
+
 
 ## Getting Started
 

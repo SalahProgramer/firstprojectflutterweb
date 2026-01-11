@@ -8,7 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_localization
   flutter_secure_storage_linux
   gtk
-  rive_native
+  rive_common
   sentry_flutter
   url_launcher_linux
 )

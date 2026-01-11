@@ -13,7 +13,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_inappwebview_windows
   flutter_localization
   flutter_secure_storage_windows
-  rive_native
+  rive_common
   sentry_flutter
   share_plus
   url_launcher_windows
