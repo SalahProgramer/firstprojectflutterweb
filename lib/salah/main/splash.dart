@@ -5,8 +5,6 @@ import 'package:fawri_app_refactor/salah/controllers/fetch_controller.dart';
 import 'package:fawri_app_refactor/salah/controllers/page_main_screen_controller.dart';
 import 'package:fawri_app_refactor/salah/utilities/networks/connection_network.dart';
 import 'package:fawri_app_refactor/salah/utilities/style/colors.dart';
-import 'package:fawri_app_refactor/salah/utilities/global/app_global.dart';
-import 'package:fawri_app_refactor/salah/views/pages/home/main_screen/first_project_webview_page.dart';
 import 'package:fawri_app_refactor/server/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -219,8 +217,7 @@ class _SplashState extends State<Splash> {
 
         await Future.delayed(Duration(milliseconds: 500));
 
-        // Navigate to WebView page
-        NavigatorApp.navigateToRemoveUntil(const FirstProjectWebViewPage());
+        await checksController.viewPage();
       }
     } catch (e) {
       printLog(e.toString());
@@ -291,13 +288,7 @@ class _SplashState extends State<Splash> {
           await checkController.changeNavigateTriggered(nav: true);
           await pageMainScreenController.changeDoRefresh(true);
           
-          // Auto-add user on first launch
-          if (checkController.firstScreen) {
-            await checkController.autoAddUser();
-          }
-
-          // Navigate to WebView page
-          NavigatorApp.navigateToRemoveUntil(const FirstProjectWebViewPage());
+          await checkController.viewPage();
         }
       } catch (e, stack) {
         await SentryService.captureError(
