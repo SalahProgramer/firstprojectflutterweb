@@ -6,12 +6,12 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fawri_app_refactor/main.dart';
+import 'package:fawri_app_refactor/salah/main/fawri_main.dart';
 
 void main() {
   testWidgets('Hello World smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const Fawri());
 
     // Verify that our app displays "Hello World" text.
     expect(find.text('Hello World'), findsOneWidget);

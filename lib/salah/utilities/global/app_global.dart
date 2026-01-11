@@ -4,11 +4,22 @@ import '../../animation/animation.dart';
 
 class NavigatorApp {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static BuildContext context = navigatorKey.currentState!.context;
 
-  static ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(
-    context,
-  );
+  static BuildContext get context {
+    final currentState = navigatorKey.currentState;
+    if (currentState == null) {
+      throw FlutterError(
+        'NavigatorApp.context accessed before the navigator is ready. '
+        'Make sure the MaterialApp with navigatorKey: NavigatorApp.navigatorKey '
+        'has been built before accessing the context.',
+      );
+    }
+    return currentState.context;
+  }
+
+  static ScaffoldMessengerState get scaffoldMessenger {
+    return ScaffoldMessenger.of(context);
+  }
 
   static pop() {
     if (navigatorKey.currentState!.canPop()) {
